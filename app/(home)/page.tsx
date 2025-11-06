@@ -5,8 +5,9 @@ export default function HomePage() {
     <main className="flex-1">
       <div className="container mx-auto px-4 py-16 sm:py-24">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-br from-fd-foreground to-fd-foreground/70 bg-clip-text text-transparent">
-            TON Console Docs
+          <h1 className="text-5xl sm:text-6xl mb-6 bg-gradient-to-br from-fd-foreground to-fd-foreground/70 bg-clip-text text-transparent">
+            <span className="font-extrabold">TON</span>
+            <span className="font-bold">API</span>
           </h1>
           <p className="text-xl sm:text-2xl text-fd-muted-foreground mb-12 max-w-2xl mx-auto">
             Find the technical documentation and guides for TonAPI, TON Console, Tonkeeper and more.
