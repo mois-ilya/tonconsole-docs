@@ -12,3 +12,130 @@
   --color-fd-primary: hsl(212, 71%, 52%);
   --color-fd-primary-foreground: hsl(0, 0%, 100%);
 }
+
+/* TonAPI Original Variables */
+:root {
+  --backgroundPrimary: #121212;
+  --backgroundSecondary: #f1f3f5;
+  --backgroundSecondaryHover: #e5e7ea;
+  --backgroundSecondaryOpacity: rgba(255, 255, 255, 0.04);
+  --backgroundHighlightOpacity: rgba(255, 255, 255, 0.3);
+  --backgroundHoverOpacity: rgba(255, 255, 255, 0.08);
+  --linearPrimary: linear-gradient(245deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --linearSecondary: linear-gradient(245deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+  --linearTertiary: linear-gradient(245deg, rgba(35, 35, 35, 0.12) 0%, rgba(44, 44, 44, 0.12) 100%);
+  --backgroundBlue: rgba(44, 126, 219, 0.2);
+  --backgroundGreen: rgba(21, 173, 97, 0.2);
+  --borderPrimary: rgba(255, 255, 255, 0.08);
+  --borderSecondary: rgba(131, 137, 143, 0.16);
+  --foregroundSecondary: rgba(255, 255, 255, 0.6);
+  --foregroundTertiary: #7e868f;
+  --boxShadow: 0 4px 4px rgba(0, 0, 0, 0.04), 0 4px 20px rgba(0, 0, 0, 0.12);
+  --constantWhite: #ffffff;
+  --constantBlack: #000000;
+  --accentBlue: #2c7edb;
+  --accentGreen: #15ad61;
+  --accentRed: #f53c36;
+  --accentOrange: #f59931;
+  --accentPurple: #972cf5;
+  --gradientPrimary: #001dc2;
+  --fontMono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono',
+    'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --fontSystem: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
+}
+
+/* Text Styles from TonAPI */
+.title1 {
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 56px;
+}
+
+@media (max-width: 768px) {
+  .title1 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 40px;
+  }
+}
+
+.title2 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+@media (max-width: 768px) {
+  .title2 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+}
+
+.body1 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+@media (max-width: 768px) {
+  .body1 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+}
+
+.body2 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.body3 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.label1 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.label2 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.label3 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.num1 {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.api1 {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.api2 {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.text-mono {
+  font-family: var(--fontMono);
+}
