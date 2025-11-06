@@ -1,72 +1,60 @@
 'use client';
 
+import { use, useEffect, useId, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { useEffect, useRef, useState } from 'react';
-import type mermaid from 'mermaid';
 
-const cachePromise = <T,>(promise: () => Promise<T>): (() => Promise<T>) => {
-  const cache = new Map<string, Promise<T>>();
-  const key = 'mermaid';
-
-  return () => {
-    if (!cache.has(key)) {
-      cache.set(key, promise());
-    }
-    return cache.get(key)!;
-  };
-};
-
-const loadMermaid = cachePromise(() => import('mermaid'));
-
-function MermaidContent({ chart }: { chart: string }): React.ReactElement {
-  const { resolvedTheme } = useTheme();
-  const ref = useRef<HTMLDivElement>(null);
-  const [svg, setSvg] = useState<string>();
-
-  useEffect(() => {
-    let cancelled = false;
-    void loadMermaid().then(async (mod: { default: typeof mermaid }) => {
-      mod.default.initialize({
-        startOnLoad: false,
-        theme: resolvedTheme === 'dark' ? 'dark' : 'default',
-      });
-
-      if (ref.current) {
-        const { svg } = await mod.default.render(
-          `mermaid-svg-${Math.random().toString(36)}`,
-          chart
-        );
-
-        if (!cancelled) {
-          setSvg(svg);
-        }
-      }
-    });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [chart, resolvedTheme]);
-
-  return (
-    <div
-      ref={ref}
-      className="flex flex-col items-center"
-      dangerouslySetInnerHTML={{ __html: svg || '' }}
-    />
-  );
-}
-
-export function Mermaid({ chart }: { chart: string }): React.ReactElement {
+export function Mermaid({ chart }: { chart: string }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return <div>Loading diagram...</div>;
-  }
-
+  if (!mounted) return null;
   return <MermaidContent chart={chart} />;
+}
+
+const cache = new Map<string, Promise<unknown>>();
+
+function cachePromise<T>(
+  key: string,
+  setPromise: () => Promise<T>,
+): Promise<T> {
+  const cached = cache.get(key);
+  if (cached) return cached as Promise<T>;
+
+  const promise = setPromise();
+  cache.set(key, promise);
+  return promise;
+}
+
+function MermaidContent({ chart }: { chart: string }) {
+  const id = useId();
+  const { resolvedTheme } = useTheme();
+  const { default: mermaid } = use(
+    cachePromise('mermaid', () => import('mermaid')),
+  );
+
+  mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: 'loose',
+    fontFamily: 'inherit',
+    themeCSS: 'margin: 1.5rem auto 0;',
+    theme: resolvedTheme === 'dark' ? 'dark' : 'default',
+  });
+
+  const { svg, bindFunctions } = use(
+    cachePromise(`${chart}-${resolvedTheme}`, () => {
+      return mermaid.render(id, chart.replaceAll('\\n', '\n'));
+    }),
+  );
+
+  return (
+    <div
+      ref={(container) => {
+        if (container) bindFunctions?.(container);
+      }}
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
+  );
 }
