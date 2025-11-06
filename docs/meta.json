@@ -20,7 +20,7 @@
     "---Tonkeeper---",
     "tonkeeper/deep-linking",
     "tonkeeper/signer",
-    "---Payment---",
+    "---Payment Processing---",
     "payment-processing",
     "payment-processing/tonapi-embed"
   ]

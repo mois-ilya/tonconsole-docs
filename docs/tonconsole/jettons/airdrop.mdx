@@ -1,9 +1,7 @@
 ---
-title: Jetton Airdrop Technical and Commercial Terms (T&C Terms)
+title: Jetton Airdrop
+description: Technical and Commercial Terms (T&C Terms)
 ---
-
-
-
 
 These T&C Terms shall be read in conjunction with the [Airdrop Terms of Use](./airdrop/terms)
 
@@ -11,6 +9,7 @@ Service enables a mass token distribution model where the recipient (**Recipient
 The distribution is carried out to a fixed list of Recipients. In the following, we will refer to the Jetton distribution process as an **Airdrop**.
 
 ## How it works
+
 1. The Airdrop organizer (**Airdrop admin**) prepares a file with a fixed list of Recipients (**Airdrop file**)
 2. The Airdrop admin creates a new project in Ton Console and fills in the Airdrop data
 3. The Airdrop admin connects their wallet via TON Connect (in Ton Console) and deploys the Airdrop smart contracts
@@ -19,9 +18,11 @@ The distribution is carried out to a fixed list of Recipients. In the following,
 ## Airdrop file preparation
 
 > **Note**: Only the account specified in the **Airdrop file** can claim Jettons.
+
     The Airdrop file must include addresses of the wallets in the TON blockchain supported by the Ton Connect protocol.
 
 ### File format requirements
+
 1. CSV format with a comma delimiter
 2. Contain a header in the format: `recipient,amount`
 3. Jetton amount in minimal indivisible units (example: `1000000` for 1 USDT where decimals=6). Decimals can be found in the Jetton [metadata](https://docs.ton.org/v3/guidelines/dapps/asset-processing/nft-processing/metadata-parsing#jetton-metadata-attributes). The value must be positive, and decimal points are not allowed.
@@ -29,6 +30,7 @@ The distribution is carried out to a fixed list of Recipients. In the following,
 5. File size up to 10,000,000 records
 
 ### Airdrop file example
+
 ```csv
 recipient,amount
 0:d0ef5351eb05503c10a447543113b315e772d147c51aaa81aa308b5cae99e07e,2567953998
@@ -37,6 +39,7 @@ recipient,amount
 ```
 
 ### Airdrop file hash verification
+
 After downloading the Airdrop file, verify the sha256 hash of your original file and the hash in the Ton Console.
 
 ## Airdrop admin
@@ -45,9 +48,11 @@ When creating a new Airdrop in Ton Console, you will need to connect your wallet
 The address of this wallet will be recorded as the Airdrop admin`s address for the contracts.
 
 > **Note**: Only Airdrop admin will be able to manage the distribution (such as completing the distribution and withdrawing the accumulated profit).
+
     To send messages in batches, a wallet capable of sending 255 messages is required. Ton Console requires connecting a W5 wallet only.
 
 > **Note**: To deploy the Airdrop smart contracts, you will need to have sufficient TON balance in the connected wallet to cover blockchain deployment fees.
+
     No funds will be deducted from your Ton Console balance. All deployment costs are paid directly from the connected wallet.
 
 ## Jetton for distribution
@@ -68,6 +73,7 @@ When a Recipient signs a Claim message via Ton Connect, they pay a `Claim fee` (
 In addition to the Claim fee, the Recipient also pays a blockchain fee for sending this message.
 
 Example:
+
 ```
 claim_fee = 0.15 TON
 blockchain_fee(forward_fee + gas_fee + ...) = ~0.0076 TON
@@ -88,14 +94,14 @@ The amount of TONs received by the distributor contract is divided in the follow
 
 `royalty_receiver_share = royalty_coefficient * excess`
 
-`admin_share = excess - royalty_receiver_share - blockchain_fee`, 
+`admin_share = excess - royalty_receiver_share - blockchain_fee`,
 
 where the royalty receiver share is the fees of Scalable Data Solutions Inc and admin share is the fees of the Airdrop admin.
 
 The blockchain fees shall be paid are charged both at the time of receiving Excess and upon executing any subsequent transactions involving distribution contracts.
 
 > **Note**: Keep in mind that blockchain fees may vary depending on the Jettons contracts and other factors (e.g. the presence of a deployed Jetton wallet for the Recipient).
-  Therefore, the provided proportions of the Excess division is approximate. For more accurate estimates, you can conduct test Airdrop.
+> Therefore, the provided proportions of the Excess division is approximate. For more accurate estimates, you can conduct test Airdrop.
 
 ## Vesting
 
@@ -129,7 +135,7 @@ To configure the reference application, use the following URL format:
 https://tonkeeper.github.io/airdrop-reference-dapp/?airdropId=<ID>
 ```
 
-- Replace `<ID>` with the Airdrop ID from Ton Console.
+-   Replace `<ID>` with the Airdrop ID from Ton Console.
 
 ### API for dApp interaction
 
@@ -140,6 +146,7 @@ When you click the `Enable claim` button in the Ton Console dashboard, you grant
 `GET {host}/v2/airdrop/claim/{address}?id={airdrop_id}`
 
 Where request parameters:
+
 1. `host` - address of Claim API: `https://mainnet-airdrop.tonapi.io`
 2. `address` - Recipient address in raw form. Example: `0:585eacf04d4df6c8a2e4f1ed1008e1ac3e36e14cbc37cddaf1f329a50ad43853`
 3. `airdrop_id` - unique Airdrop ID from the Airdrop dashboard in Ton Console. Example: `fa541433-ceef-4286-a76c-1be7c6198632`
@@ -151,31 +158,33 @@ The dApp should retrieve the `address` from the wallet connected through Ton Con
 #### 200 (OK)
 
 Response:
+
 ```json
 {
-  "claim_message": {
-    "mode": 3,
-    "address": "EQBdywJayJlH1PQDDNr1cX8_wOIFzxLpptbA3m5VxXPGR7wz",
-    "state_init": "base64string",
-    "payload": "base64string",
-    "amount": "150000000"
-  },
-  "jetton": "EQAZG3WSEZCd0qj-4QtCcGtMKDH9OoGD4godKRe65ceQj6Hf",
-  "available_jetton_amount": "6000",
-  "total_jetton_amount": "12000",
-  "claimed_jetton_amount": "0",
-  "vesting_parameters":{
-    "unlocks_list":[
-      {"unlock_time":1742211360,"fraction":5000},
-      {"unlock_time":1742297820,"fraction":5000}
-    ]
-  }
+    "claim_message": {
+        "mode": 3,
+        "address": "EQBdywJayJlH1PQDDNr1cX8_wOIFzxLpptbA3m5VxXPGR7wz",
+        "state_init": "base64string",
+        "payload": "base64string",
+        "amount": "150000000"
+    },
+    "jetton": "EQAZG3WSEZCd0qj-4QtCcGtMKDH9OoGD4godKRe65ceQj6Hf",
+    "available_jetton_amount": "6000",
+    "total_jetton_amount": "12000",
+    "claimed_jetton_amount": "0",
+    "vesting_parameters": {
+        "unlocks_list": [
+            { "unlock_time": 1742211360, "fraction": 5000 },
+            { "unlock_time": 1742297820, "fraction": 5000 }
+        ]
+    }
 }
 ```
 
 Where response parameters:
 
 `claim_message` - contains the data necessary for forming a message via Ton Connect
+
 1. `mode` - message sending mode (Ton Connect always sends with mode 3)
 2. `address` - destination address of the message in user-friendly format containing the bounce flag
 3. `state_init` - serialized state init cell in base64 format (it may be an empty string if claims have already been made within the vesting period)
@@ -189,105 +198,118 @@ Where response parameters:
 
 `vesting_parameters` - **optional**. Contains unlock stages, where the `unlock_time` is in Unix time format, and the `fraction` is an integer from 0 to 10000, with 10000 representing 100%.
 
-####  404 (Not found)
+#### 404 (Not found)
+
 The specified Recipient address or Airdrop ID was not found.
 
 Response:
+
 ```json
 {
-  "code": 404,
-  "message": "entity not found"
+    "code": 404,
+    "message": "entity not found"
 }
 ```
 
 #### 425 (Too early)
+
 The nearest vesting date hasn't occurred yet, and all prior dates have been claimed.
 
 Response:
+
 ```json
 {
-  "jetton": "EQAZG3WSEZCd0qj-4QtCcGtMKDH9OoGD4godKRe65ceQj6Hf",
-  "available_jetton_amount": "6000",
-  "total_jetton_amount": "12000",
-  "claimed_jetton_amount": "0",
-  "vesting_parameters":{
-    "unlocks_list":[
-      {"unlock_time":1742211360,"fraction":5000},
-      {"unlock_time":1742297820,"fraction":5000}
-    ]
-  }
+    "jetton": "EQAZG3WSEZCd0qj-4QtCcGtMKDH9OoGD4godKRe65ceQj6Hf",
+    "available_jetton_amount": "6000",
+    "total_jetton_amount": "12000",
+    "claimed_jetton_amount": "0",
+    "vesting_parameters": {
+        "unlocks_list": [
+            { "unlock_time": 1742211360, "fraction": 5000 },
+            { "unlock_time": 1742297820, "fraction": 5000 }
+        ]
+    }
 }
 ```
 
 #### 409 (Conflict)
+
 All Jettons already claimed.
 
 Response:
+
 ```json
 {
-  "jetton": "EQAZG3WSEZCd0qj-4QtCcGtMKDH9OoGD4godKRe65ceQj6Hf",
-  "available_jetton_amount": "6000",
-  "total_jetton_amount": "12000",
-  "claimed_jetton_amount": "0",
-  "vesting_parameters":{
-    "unlocks_list":[
-      {"unlock_time":1742211360,"fraction":5000},
-      {"unlock_time":1742297820,"fraction":5000}
-    ]
-  }
+    "jetton": "EQAZG3WSEZCd0qj-4QtCcGtMKDH9OoGD4godKRe65ceQj6Hf",
+    "available_jetton_amount": "6000",
+    "total_jetton_amount": "12000",
+    "claimed_jetton_amount": "0",
+    "vesting_parameters": {
+        "unlocks_list": [
+            { "unlock_time": 1742211360, "fraction": 5000 },
+            { "unlock_time": 1742297820, "fraction": 5000 }
+        ]
+    }
 }
 ```
 
 #### 423 (Locked)
+
 Blocked by the Admin using the Disable claim button or not activated with the Enable claim button.
 
 Response:
+
 ```json
 {
-  "jetton": "EQAZG3WSEZCd0qj-4QtCcGtMKDH9OoGD4godKRe65ceQj6Hf",
-  "available_jetton_amount": "6000",
-  "total_jetton_amount": "12000",
-  "claimed_jetton_amount": "0",
-  "vesting_parameters":{
-    "unlocks_list":[
-      {"unlock_time":1742211360,"fraction":5000},
-      {"unlock_time":1742297820,"fraction":5000}
-    ]
-  }
+    "jetton": "EQAZG3WSEZCd0qj-4QtCcGtMKDH9OoGD4godKRe65ceQj6Hf",
+    "available_jetton_amount": "6000",
+    "total_jetton_amount": "12000",
+    "claimed_jetton_amount": "0",
+    "vesting_parameters": {
+        "unlocks_list": [
+            { "unlock_time": 1742211360, "fraction": 5000 },
+            { "unlock_time": 1742297820, "fraction": 5000 }
+        ]
+    }
 }
 ```
 
 #### 429 (Too many requests)
+
 Blockchain overloaded. The claim will become available when the load decreases.
 
 Response:
+
 ```json
 {
-  "jetton": "EQAZG3WSEZCd0qj-4QtCcGtMKDH9OoGD4godKRe65ceQj6Hf",
-  "available_jetton_amount": "6000",
-  "total_jetton_amount": "12000",
-  "claimed_jetton_amount": "0",
-  "vesting_parameters":{
-    "unlocks_list":[
-      {"unlock_time":1742211360,"fraction":5000},
-      {"unlock_time":1742297820,"fraction":5000}
-    ]
-  }
+    "jetton": "EQAZG3WSEZCd0qj-4QtCcGtMKDH9OoGD4godKRe65ceQj6Hf",
+    "available_jetton_amount": "6000",
+    "total_jetton_amount": "12000",
+    "claimed_jetton_amount": "0",
+    "vesting_parameters": {
+        "unlocks_list": [
+            { "unlock_time": 1742211360, "fraction": 5000 },
+            { "unlock_time": 1742297820, "fraction": 5000 }
+        ]
+    }
 }
 ```
 
 #### 500 (Internal error)
+
 Some internal server error.
 
 Response:
+
 ```json
 {
-  "code": 500,
-  "message": "internal error"
+    "code": 500,
+    "message": "internal error"
 }
 ```
 
 ### Blockchain load limitation
+
 To smooth blockchain load and ensure stable operation, method `/v2/airdrop/claim` has specific rate limits.
 If the blockchain is currently under high load (many messages in the shard queue),
 method `/v2/airdrop/claim` is blocked (429 code)
@@ -302,7 +324,7 @@ as their Claims will still be delayed.
 ### Test Claim button
 
 > **Note**: It is used for testing purposes and leads to a reference implementation of the application.
-  Do not use it for production distribution, as it is not intended for that and does not guarantee reliable operation.
+> Do not use it for production distribution, as it is not intended for that and does not guarantee reliable operation.
 
 ## Distribution completion procedure
 
@@ -313,4 +335,5 @@ Second, click the `Complete airdrop` button to send special messages that lock t
 After this, you can safely withdraw the remaining Jettons and accumulated TONs from the distribution contracts to the Airdrop admin`s address.
 
 ## If you still have questions
+
 If you have any questions or need assistance, please write to Mois Ilya at [@moisle](https://t.me/moisle) or [@tonconsole](https://t.me/tonconsole).
