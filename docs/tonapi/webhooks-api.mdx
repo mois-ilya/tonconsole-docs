@@ -1,6 +1,9 @@
-import { Callout } from "nextra-theme-docs";
+---
+title: Webhooks API
+---
 
-# Webhooks API
+
+
 
 Webhooks API provides a way to subscribe to events that happen in the TON blockchain.
 This allows you to build applications that react to events in the blockchain.
@@ -117,9 +120,7 @@ POST https://rt.tonapi.io/webhooks/{webhook_id}/unsubscribe-new-contracts - stop
 
 ## Subscribe to messages with a specific opcode in a message body
 
-<Callout type="warning" emoji="⚠️">
-  This subscription will trigger webhooks for **every** message on the blockchain that contains the specified opcode — even if it's unrelated to your accounts.
-</Callout>
+> **Note**: This subscription will trigger webhooks for **every** message on the blockchain that contains the specified opcode — even if it's unrelated to your accounts.
 
 POST https://rt.tonapi.io/webhooks/{webhook_id}/subscribe-msg-opcode/0x{opcode} - when a new transaction is happening with a message that contains a specific opcode in its body,
 TONAPI sends a POST request to the webhook URL.

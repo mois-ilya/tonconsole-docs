@@ -1,19 +1,10 @@
-import { ExternalLink, SchemaLoader, SwaggerLink } from "@/components";
-import {
-  SWAGGER_SCHEMA_YAML_URL,
-  TONAPI_LANDING_PAGE_SWAGGER_URL,
-  GITHUB_LINKS,
-  SWAGGER_TAGS
-} from "@/constants";
-import { loadStatic } from "@/utils";
-
-export const getStaticProps = loadStatic;
-
-# Gasless<SwaggerLink tag={SWAGGER_TAGS.GASLESS} />
+---
+title: Gasless
+---
 
 **Gasless transactions** on the TON platform enable users to send transactions without paying gas fees directly from their wallets. This is achieved using **Signed Internal Messages** sent through a **gas proxy contract**, which covers the transaction fees on behalf of the user. This approach simplifies blockchain interactions, making it easier for users who may not have TON tokens in their wallets.
 
-This service only works with <ExternalLink href={GITHUB_LINKS.W5_SPECIFICATION}>W5 wallets</ExternalLink>
+This service only works with [W5 wallets](https://github.com/tonkeeper/w5)
 
 ### Architecture
 
@@ -47,4 +38,3 @@ A detailed example of gasless transaction implementation is available in the [Co
 
 ## Operations
 
-<SchemaLoader tag={SWAGGER_TAGS.GASLESS} />

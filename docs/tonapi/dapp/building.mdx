@@ -1,6 +1,9 @@
-import { Callout } from "nextra-theme-docs";
+---
+title: Guide to Building a dApp with TON API
+---
 
-# Guide to Building a dApp with TON API
+
+
 
 This guide provides detailed instructions for building a decentralized application (dApp) using **TON API** and **TonConnect**, including step-by-step explanations and code examples. The complete project is available on [GitHub](https://github.com/tonkeeper/tonapi-dapp-example.git).
 
@@ -41,8 +44,6 @@ npm install @tonconnect/ui-react
 Update the `src/main.tsx` file to include the `TonConnectUIProvider`:
 
 ```tsx
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
-import App from './App.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <TonConnectUIProvider
@@ -65,9 +66,7 @@ To use TON API, install the necessary libraries:
 npm install @ton-api/client @ton/core
 ```
 
-<Callout type="info" emoji="🔵">
-  For using @ton/core in a browser environment, you need to include the Buffer polyfill.
-</Callout>
+> **Note**: For using @ton/core in a browser environment, you need to include the Buffer polyfill.
 
 ### Add Buffer Polyfill
 
@@ -80,9 +79,6 @@ npm install vite-plugin-node-polyfills
 Then configure Vite by updating `vite.config.ts`:
 
 ```ts
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
   plugins: [nodePolyfills(), react()]
@@ -96,7 +92,6 @@ export default defineConfig({
 Next, set up a client to interact with the TON API. Create a new file `src/tonapi.ts` with the following content:
 
 ```ts
-import { TonApiClient } from '@ton-api/client';
 
 const ta = new TonApiClient({
   baseUrl: 'https://tonapi.io',
@@ -119,10 +114,6 @@ VITE_TONAPI_KEY=your-api-key
 Now, we’ll fetch and display the user’s jetton balances. Update the `src/App.tsx` file:
 
 ```tsx
-import { useEffect, useState } from "react";
-import { TonConnectButton, useTonAddress } from "@tonconnect/ui-react";
-import { JettonBalance } from "@ton-api/client";
-import ta from "./tonapi";
 
 function App() {
   const [jettons, setJettons] = useState<JettonBalance[] | null>(null);
@@ -175,10 +166,6 @@ Now that we have jetton balances displayed, let's add a transfer functionality. 
 Create a new file `src/components/SendJettonModal.tsx` with the following code:
 
 ```tsx
-import { useState } from "react";
-import { JettonBalance } from "@ton-api/client";
-import { useTonConnectUI } from "@tonconnect/ui-react";
-import { getJettonSendTransactionRequest } from "../utils/jetton-transfer";
 
 export const SendJettonModal = ({ jetton, senderAddress, onClose }) => {
   const [recipientAddress, setRecipientAddress] = useState("");
@@ -230,10 +217,6 @@ export const SendJettonModal = ({ jetton, senderAddress, onClose }) => {
 Create `src/utils/jetton-transfer.ts` to handle transaction creation:
 
 ```ts
-import { JettonBalance } from '@ton-api/client';
-import { beginCell, Address, toNano } from '@ton/core';
-import { SendTransactionRequest } from '@tonconnect/ui-react';
-import { fromDecimals } from './decimals';
 
 export const getJettonSendTransactionRequest = (
   jetton: JettonBalance, amountStr: string, recipientAddressStr: string, senderAddress: Address

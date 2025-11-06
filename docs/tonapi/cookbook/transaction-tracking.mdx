@@ -1,16 +1,13 @@
-import { ExampleTabs, ExampleTab, ExternalLink } from '@/components';
-import { SWAGGER_TAGS } from '@/constants';
-import { getLinkToSwaggerTag } from '@/utils';
-import TrackingTransactionHashGo from '@/examples/tracking-transaction-hash.go.mdx';
-import TrackingTransactionHashTs from '@/examples/tracking-transaction-hash.ts.mdx';
-import TrackingTransactionMessageBocTs from '@/examples/tracking-transaction-message-boc.ts.mdx';
-import TrackingTransactionMessageManualTs from '@/examples/tracking-transaction-message-manual.ts.mdx';
+---
+title: Transaction Tracking
+---
 
-# Transaction Tracking
+
+
 
 To reliably find a transaction from an external message (external-in) in the TON blockchain, use a normalized hash instead of a regular hash. External messages may slightly alter metadata when included in the blockchain, causing regular hashes to fail in locating the transaction.
 
-Swagger documentation for Blockchain operations can be found <ExternalLink href={getLinkToSwaggerTag(SWAGGER_TAGS.BLOCKCHAIN)}>here</ExternalLink>.
+Swagger documentation for Blockchain operations can be found [here].
 
 <ExampleTabs>
   <ExampleTab label="TypeScript">

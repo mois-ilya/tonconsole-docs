@@ -1,7 +1,9 @@
-import { Callout } from 'nextra-theme-docs';
-import { ExampleTabs, ExampleTab } from "@/components";
+---
+title: Jetton Airdrop Technical and Commercial Terms (T&C Terms)
+---
 
-# Jetton Airdrop Technical and Commercial Terms (T&C Terms)
+
+
 
 These T&C Terms shall be read in conjunction with the [Airdrop Terms of Use](./airdrop/terms)
 
@@ -16,10 +18,8 @@ The distribution is carried out to a fixed list of Recipients. In the following,
 
 ## Airdrop file preparation
 
-<Callout type="info" emoji="ℹ️">
-    Only the account specified in the **Airdrop file** can claim Jettons.
+> **Note**: Only the account specified in the **Airdrop file** can claim Jettons.
     The Airdrop file must include addresses of the wallets in the TON blockchain supported by the Ton Connect protocol.
-</Callout>
 
 ### File format requirements
 1. CSV format with a comma delimiter
@@ -44,15 +44,11 @@ After downloading the Airdrop file, verify the sha256 hash of your original file
 When creating a new Airdrop in Ton Console, you will need to connect your wallet via Ton Connect.
 The address of this wallet will be recorded as the Airdrop admin`s address for the contracts.
 
-<Callout type="warning" emoji="🚨">
-    Only Airdrop admin will be able to manage the distribution (such as completing the distribution and withdrawing the accumulated profit).
+> **Note**: Only Airdrop admin will be able to manage the distribution (such as completing the distribution and withdrawing the accumulated profit).
     To send messages in batches, a wallet capable of sending 255 messages is required. Ton Console requires connecting a W5 wallet only.
-</Callout>
 
-<Callout type="info" emoji="ℹ️">
-    To deploy the Airdrop smart contracts, you will need to have sufficient TON balance in the connected wallet to cover blockchain deployment fees.
+> **Note**: To deploy the Airdrop smart contracts, you will need to have sufficient TON balance in the connected wallet to cover blockchain deployment fees.
     No funds will be deducted from your Ton Console balance. All deployment costs are paid directly from the connected wallet.
-</Callout>
 
 ## Jetton for distribution
 
@@ -62,9 +58,7 @@ For example: Notcoin address is `EQAvlWFDxGF2lXm67y4yzC17wYKD9A0guwPkMs1gOsM__NO
 If you have created a Jetton not based on the standard smart contract or are sending a Jetton minted by someone else, be cautious.
 Custom smart contract logic may disrupt the distribution process (e.g. the transfer fees may be significantly higher). Use only trusted Jettons.
 
-<Callout type="info" emoji="ℹ️">
-  Before starting distributions of new Jettons, be sure to conduct a test run with a small number of Recipients.
-</Callout>
+> **Note**: Before starting distributions of new Jettons, be sure to conduct a test run with a small number of Recipients.
 
 ## Claim Fee
 
@@ -100,10 +94,8 @@ where the royalty receiver share is the fees of Scalable Data Solutions Inc and 
 
 The blockchain fees shall be paid are charged both at the time of receiving Excess and upon executing any subsequent transactions involving distribution contracts.
 
-<Callout type="info" emoji="ℹ️">
-  Keep in mind that blockchain fees may vary depending on the Jettons contracts and other factors (e.g. the presence of a deployed Jetton wallet for the Recipient).
+> **Note**: Keep in mind that blockchain fees may vary depending on the Jettons contracts and other factors (e.g. the presence of a deployed Jetton wallet for the Recipient).
   Therefore, the provided proportions of the Excess division is approximate. For more accurate estimates, you can conduct test Airdrop.
-</Callout>
 
 ## Vesting
 
@@ -309,7 +301,6 @@ as their Claims will still be delayed.
 
   <ExampleTab label="JavaScript">
 ```javascript
-import { tonConnectUI } from '@tonconnect/ui';
 
 function claimJetton(claimId, userAddress) {
     const claimUrl = `https://mainnet-airdrop.tonapi.io/v2/airdrop/claim/${userAddress}?id=${airdropId}`;
@@ -341,10 +332,8 @@ claimJetton('<ID of Airdrop from tonconsole>', '<User address from tonConnectUI>
 
 ### Test Claim button
 
-<Callout type="info" emoji="ℹ️">
-  It is used for testing purposes and leads to a reference implementation of the application.
+> **Note**: It is used for testing purposes and leads to a reference implementation of the application.
   Do not use it for production distribution, as it is not intended for that and does not guarantee reliable operation.
-</Callout>
 
 ## Distribution completion procedure
 

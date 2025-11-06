@@ -1,11 +1,11 @@
-import { Callout } from "nextra-theme-docs";
-import {ExternalLink} from "../../components";
+---
+title: Streaming API
+---
 
-# Streaming API
 
-<Callout type="warning" emoji="🚨">
-  Streaming API is deprecated — please use [Webhooks API](./webhooks-api) for real-time updates.
-</Callout>
+
+
+> **Note**: Streaming API is deprecated — please use [Webhooks API](./webhooks-api) for real-time updates.
 
 
 {/* TonAPI V2 offers real-time updates about events in the blockchain. */}
@@ -59,7 +59,7 @@ a list of account IDs  and an optional list of operations.
 | Query parameter | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 |-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | accounts        | A comma-separated list of account IDs. A special value of "accounts" is **ALL**. TonAPI will stream transactions for all accounts in this case.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| operations      | A comma-separated list of operations, which makes it possible to get transactions based on the [first 4 bytes of a message body of an inbound message](https://docs.ton.org/develop/smart-contracts/guidelines/internal-messages#internal-message-body). <br/><br/>Each operation is a string containing either <ExternalLink href="https://github.com/tonkeeper/tongo/blob/master/abi/messages.md">one of the supported names</ExternalLink> or a hex string representing a message operation opcode which is an unsigned 32-bit integer. <br/><br/>A hex string must start with "0x" prefix and have exactly 8 hex digits. <br/> An example of "operations" is `&operations=JettonTransfer,0x0524c7ae,StonfiSwap`. <br/><br/>The advantage of using hex strings is that it's possible to get transactions for operations that are not yet present on <ExternalLink href="https://github.com/tonkeeper/tongo/blob/master/abi/messages.md">the list</ExternalLink>. |
+| operations      | A comma-separated list of operations, which makes it possible to get transactions based on the [first 4 bytes of a message body of an inbound message](https://docs.ton.org/develop/smart-contracts/guidelines/internal-messages#internal-message-body). <br/><br/>Each operation is a string containing either [one of the supported names](https://github.com/tonkeeper/tongo/blob/master/abi/messages.md) or a hex string representing a message operation opcode which is an unsigned 32-bit integer. <br/><br/>A hex string must start with "0x" prefix and have exactly 8 hex digits. <br/> An example of "operations" is `&operations=JettonTransfer,0x0524c7ae,StonfiSwap`. <br/><br/>The advantage of using hex strings is that it's possible to get transactions for operations that are not yet present on [the list](https://github.com/tonkeeper/tongo/blob/master/abi/messages.md). |
 
 Then it starts streaming finalized transactions that belong to the given list of accounts.
 
@@ -184,9 +184,9 @@ In this case, TonAPI will stream transactions that belong to the given account a
 An operation is [the first 4 bytes of a message body of an inbound message](https://docs.ton.org/develop/smart-contracts/guidelines/internal-messages#internal-message-body).
 
 An example of "operations" is `operations=JettonTransfer,0x0524c7ae,StonfiSwap`.
-It is a comma-separated list. Each item is <ExternalLink href="https://github.com/tonkeeper/tongo/blob/master/abi/messages.md">an operation name</ExternalLink> or a hex string representing a message operation opcode which is an unsigned 32-bit integer.
+It is a comma-separated list. Each item is [an operation name](https://github.com/tonkeeper/tongo/blob/master/abi/messages.md) or a hex string representing a message operation opcode which is an unsigned 32-bit integer.
 A hex string must start with "0x" prefix and have exactly 8 hex digits.
-The advantage of using hex strings is that it's possible to get transactions for operations that are not yet present on <ExternalLink href="https://github.com/tonkeeper/tongo/blob/master/abi/messages.md">the list</ExternalLink>.
+The advantage of using hex strings is that it's possible to get transactions for operations that are not yet present on [the list](https://github.com/tonkeeper/tongo/blob/master/abi/messages.md).
 
 A request example:
 ```json

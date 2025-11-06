@@ -1,4 +1,6 @@
-# Using free high TONAPI limits in your dApp with Tonkeeper
+---
+title: Using free high TONAPI limits in your dApp with Tonkeeper
+---
 
 ## Overview
 TONAPI is already available for free, but with a default rate limit of **1 request per second (1 RPS)**. If your dApp requires higher limits, you can take advantage of Tonkeeper's built-in mechanism to gain additional API capacity at no extra cost.
@@ -18,7 +20,6 @@ When a dApp is opened inside the Tonkeeper browser or a browser with the Tonkeep
 Even when using `window.tonapi.fetch`, you **must provide a valid TONAPI key** when initializing `@ton-api/client`. The key can be a free-tier key, but it must be valid.
 
 ```ts
-import { TonApiClient } from "@ton-api/client";
 
 const tonApi = new TonApiClient({
     apiKey: "your-valid-tonapi-key"
@@ -43,4 +44,3 @@ if (!window.tonapi) {
 - You can restrict your dApp to work only when `window.tonapi` is available if you need high RPS.
 
 For more details about methods, go to [REST API section](/tonapi/rest-api).
-
