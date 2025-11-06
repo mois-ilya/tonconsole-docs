@@ -26,9 +26,7 @@ These SDKs are maintained by the community and provide additional language suppo
 
 If you prefer to generate an SDK yourself, you can do so using the TonAPI OpenAPI specification. Follow these steps:
 
-<Steps>
-
-### Install the OpenAPI Generator CLI Tool:
+### Step 1: Install the OpenAPI Generator CLI Tool
 
 Install the OpenAPI generator globally using `npm`:
 
@@ -36,7 +34,7 @@ Install the OpenAPI generator globally using `npm`:
 npm install @openapitools/openapi-generator-cli -g
 ```
 
-### Generate the SDK:
+### Step 2: Generate the SDK
 
 Use the command below to generate the SDK. The example is for Ruby, but you can specify a different language by changing the `-g` (generator) parameter.
 
@@ -44,14 +42,16 @@ Use the command below to generate the SDK. The example is for Ruby, but you can 
 npx openapi-generator-cli generate -i https://raw.githubusercontent.com/tonkeeper/opentonapi/master/api/openapi.yml -g ruby -o /path/to/output
 ```
 
-- **Note:** Replace `/path/to/output` with the actual directory path where you want to generate the SDK.
+**Note:** Replace `/path/to/output` with the actual directory path where you want to generate the SDK.
+
+### Handling Common Issues
 
 If you encounter issues during client generation for certain languages (for example, due to multiple tags per operation or possible future enum value additions), consider using the following options:
 
-- `--openapi-normalizer KEEP_ONLY_FIRST_TAG_IN_OPERATION=true`  
+- `--openapi-normalizer KEEP_ONLY_FIRST_TAG_IN_OPERATION=true`
   This flag helps if the Swagger file contains multiple tags for a single operation and your SDK generator/language has trouble with that (it keeps only the first tag).
 
-- `--additional-properties=enumUnknownDefaultCase=true`  
+- `--additional-properties=enumUnknownDefaultCase=true`
   This flag ensures your generated SDKs will gracefully handle new/unknown enum values in the future by mapping them to a default enum case such as `UNKNOWN_DEFAULT` (supported in Java, Kotlin, TypeScript, Swift, etc).
 
 You can combine these options in a single command, for example:
@@ -64,8 +64,6 @@ npx openapi-generator-cli generate \
   -o /path/to/output \
   --additional-properties=enumUnknownDefaultCase=true
 ```
-
-</Steps>
 
 To run the OpenAPI generator, you need to have `Node.js` and `npm` installed on your system, as well as Java 11 or higher. These are necessary prerequisites to ensure proper execution.
 
