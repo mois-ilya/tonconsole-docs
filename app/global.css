@@ -2,13 +2,13 @@
 @import 'fumadocs-ui/style.css';
 
 @theme {
-  /* TonAPI Blue Accent Color - #2c7edb (hsl: 212, 71%, 52%) */
-  --color-fd-primary: 212 71% 52%;
-  --color-fd-primary-foreground: 0 0% 100%;
+  /* TonAPI Blue Accent Color - #2c7edb */
+  --color-fd-primary: hsl(212, 71%, 52%);
+  --color-fd-primary-foreground: hsl(0, 0%, 100%);
 }
 
 .dark {
   /* TonAPI Blue Accent Color for Dark Mode */
-  --color-fd-primary: 212 71% 52%;
-  --color-fd-primary-foreground: 0 0% 100%;
+  --color-fd-primary: hsl(212, 71%, 52%);
+  --color-fd-primary-foreground: hsl(0, 0%, 100%);
 }

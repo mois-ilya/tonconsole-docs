@@ -267,6 +267,152 @@ export default function HomePage() {
             </div>
           </section>
 
+          {/* TON Console Section */}
+          <section className="flex flex-col gap-6">
+            <h2 className="text-3xl md:text-4xl font-semibold">TON Console</h2>
+            <div className="flex flex-col gap-4">
+              {/* Tonkeeper Messages - Large Card */}
+              <a
+                href="https://docs.tonconsole.com/tonconsole/tonkeeper-messages"
+                target="_blank"
+                className="flex flex-col md:flex-row rounded-xl border border-fd-border bg-gradient-to-br from-fd-secondary/50 to-transparent hover:from-fd-secondary/70 transition-all overflow-hidden">
+                <div className="flex flex-col justify-between p-5 md:p-6 gap-6 md:gap-8">
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-xl md:text-2xl font-semibold">Tonkeeper Messages</h3>
+                    <p className="text-sm md:text-base text-fd-muted-foreground max-w-[490px]">
+                      Push notifications for users who have connected to your dApp via Tonkeeper. Notifications can help triple your DAU and double your Daily Revenue.
+                    </p>
+                  </div>
+                  <div className="text-sm font-semibold text-fd-primary">Explore Options →</div>
+                </div>
+                <div className="relative flex-1 min-h-[200px] md:min-h-[320px] md:min-w-[50%]">
+                  <Image
+                    src="/images/console/messages.png"
+                    alt="Tonkeeper Messages"
+                    fill
+                    className="object-cover hidden md:block"
+                  />
+                  <Image
+                    src="/images/console/messages2.png"
+                    alt="Tonkeeper Messages"
+                    fill
+                    className="object-cover md:hidden"
+                  />
+                  <div className="absolute left-[5%] md:left-[20%] top-1/2 -translate-y-1/2 flex flex-col gap-5">
+                    <div className="flex flex-col items-center justify-center gap-1 w-[100px] md:w-[122px] h-[100px] md:h-[122px] border border-fd-border bg-gradient-to-br from-fd-secondary/80 to-fd-secondary/40 backdrop-blur-xl rounded-xl">
+                      <div className="text-3xl md:text-4xl font-normal">×2</div>
+                      <div className="text-lg md:text-xl font-light text-fd-muted-foreground">revenue</div>
+                    </div>
+                    <div className="flex flex-col items-center justify-center gap-1 w-[100px] md:w-[122px] h-[100px] md:h-[122px] border border-fd-border bg-gradient-to-br from-fd-secondary/80 to-fd-secondary/40 backdrop-blur-xl rounded-xl">
+                      <div className="text-3xl md:text-4xl font-normal">×3</div>
+                      <div className="text-lg md:text-xl font-light text-fd-muted-foreground">DAU</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              {/* Row 1: Airdrop & Jetton Minter */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="relative flex flex-col rounded-xl border border-fd-border bg-gradient-to-br from-fd-secondary/50 to-transparent hover:from-fd-secondary/70 transition-all overflow-hidden">
+                  <a href="https://tonapi.io/airdrop" target="_blank" className="absolute inset-0 z-0" aria-label="TONAPI Airdrop"></a>
+                  <div className="relative w-full h-[148px]">
+                    <Image
+                      src="/images/console/airdrop.png"
+                      alt="TONAPI Airdrop"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col p-5 md:p-6 gap-6">
+                    <div className="flex flex-col gap-1">
+                      <h3 className="text-lg md:text-xl font-semibold">TONAPI Airdrop</h3>
+                      <p className="text-sm text-fd-muted-foreground">
+                        Simplify airdrop with our solution on the TON Blockchain. Distribute Jettons to millions of users
+                        quickly, without the need for coding. Without extra fees for you.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 text-sm font-semibold text-fd-primary relative z-10">
+                      <a href="https://docs.tonconsole.com/tonconsole/jettons/airdrop" target="_blank">Documentation</a>
+                      <a href="https://tonapi.io/airdrop" target="_blank">Learn more</a>
+                    </div>
+                  </div>
+                </div>
+
+                <a
+                  href="https://tonconsole.com/jetton/new-jetton"
+                  target="_blank"
+                  className="flex flex-col rounded-xl border border-fd-border bg-gradient-to-br from-fd-secondary/50 to-transparent hover:from-fd-secondary/70 transition-all overflow-hidden">
+                  <div className="relative w-full h-[148px]">
+                    <Image
+                      src="/images/console/minter.png"
+                      alt="Jetton Minter"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col p-5 md:p-6 gap-6">
+                    <div className="flex flex-col gap-1">
+                      <h3 className="text-lg md:text-xl font-semibold">Jetton Minter</h3>
+                      <p className="text-sm text-fd-muted-foreground">
+                        Create tokens quickly and easily. A simple tool designed for token creation, giving you full control over the issuance and management of your jettons.
+                      </p>
+                    </div>
+                    <div className="text-sm font-semibold text-fd-primary">Explore Options →</div>
+                  </div>
+                </a>
+              </div>
+
+              {/* Row 2: cNFT & TON Analytics */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a
+                  href="https://docs.tonconsole.com/tonconsole/nft/cnft"
+                  target="_blank"
+                  className="flex flex-col rounded-xl border border-fd-border bg-gradient-to-br from-fd-secondary/50 to-transparent hover:from-fd-secondary/70 transition-all overflow-hidden">
+                  <div className="relative w-full h-[148px]">
+                    <Image
+                      src="/images/console/cnft.png"
+                      alt="cNFT"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col p-5 md:p-6 gap-6">
+                    <div className="flex flex-col gap-1">
+                      <h3 className="text-lg md:text-xl font-semibold">cNFT</h3>
+                      <p className="text-sm text-fd-muted-foreground">
+                        Simplify the process to index mintless NFTs with our cNFT indexer. This powerful tool allows you to build large-scale NFT collections quickly and at a lower cost, giving you more flexibility for your NFT projects.
+                      </p>
+                    </div>
+                    <div className="text-sm font-semibold text-fd-primary">Explore Options →</div>
+                  </div>
+                </a>
+
+                <a
+                  href="https://docs.tonconsole.com/tonconsole/analytics/examples"
+                  target="_blank"
+                  className="flex flex-col rounded-xl border border-fd-border bg-gradient-to-br from-fd-secondary/50 to-transparent hover:from-fd-secondary/70 transition-all overflow-hidden">
+                  <div className="relative w-full h-[148px]">
+                    <Image
+                      src="/images/console/query.png"
+                      alt="TON Analytics"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col p-5 md:p-6 gap-6">
+                    <div className="flex flex-col gap-1">
+                      <h3 className="text-lg md:text-xl font-semibold">TON Analytics</h3>
+                      <p className="text-sm text-fd-muted-foreground">
+                        Unlock the power of Blockchain analysis with TonAnalytics. Run SQL queries on the TonAPI indexer database to analyze blockchain data effortlessly.
+                      </p>
+                    </div>
+                    <div className="text-sm font-semibold text-fd-primary">Explore Options →</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </section>
+
           {/* Clients Section */}
           <section id="clients" className="flex flex-col gap-10 scroll-mt-10">
             <div className="flex flex-col gap-3">
