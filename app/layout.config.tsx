@@ -19,5 +19,17 @@ export const baseOptions: BaseLayoutProps = {
       </div>
     ),
   },
+  links: [
+    {
+      text: 'Documentation',
+      url: '/docs',
+      active: 'nested-url',
+    },
+    {
+      text: 'Academy',
+      url: '/blog',
+      active: 'nested-url',
+    },
+  ],
   githubUrl: 'https://github.com/tonkeeper/tonconsole-docs',
 };
