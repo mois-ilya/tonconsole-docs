@@ -1,6 +1,6 @@
-import { defineDocs, defineConfig } from 'fumadocs-mdx/config';
+import { defineConfig, defineDocs } from 'fumadocs-mdx/config';
 
-export const docs = defineDocs({
+export const { docs, meta } = defineDocs({
   dir: 'docs',
 });
 
@@ -8,6 +8,4 @@ export const blog = defineDocs({
   dir: 'blog',
 });
 
-export default defineConfig({
-  lastModifiedTime: 'git',
-});
+export default defineConfig();

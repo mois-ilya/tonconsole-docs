@@ -1,11 +1,11 @@
-import { docsLoader } from '@/source';
+import { docsSource } from '@/source';
 import type { Metadata } from 'next';
 import { DocsPage, DocsBody, DocsTitle, DocsDescription } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
 
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
   const params = await props.params;
-  const page = docsLoader.getPage(params.slug);
+  const page = docsSource.getPage(params.slug);
   if (!page) notFound();
 
   return (
@@ -24,7 +24,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
 }
 
 export async function generateStaticParams() {
-  return docsLoader.getPages().map((page) => ({
+  return docsSource.getPages().map((page) => ({
     slug: page.slugs,
   }));
 }
@@ -33,7 +33,7 @@ export async function generateMetadata(props: {
   params: Promise<{ slug?: string[] }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const page = docsLoader.getPage(params.slug);
+  const page = docsSource.getPage(params.slug);
   if (!page) notFound();
 
   return {

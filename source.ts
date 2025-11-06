@@ -1,12 +1,9 @@
-import { docs, blog } from './source.config';
+import { docs, meta, blog } from '@/source.config';
 import { loader } from 'fumadocs-core/source';
 import { icons } from 'lucide-react';
 import { createElement } from 'react';
 
-export { docs, blog };
-
-// Create loaders
-export const docsLoader = loader({
+export const docsSource = loader({
   baseUrl: '/docs',
   source: docs,
   icon(icon) {
@@ -15,7 +12,7 @@ export const docsLoader = loader({
   },
 });
 
-export const blogLoader = loader({
+export const blogSource = loader({
   baseUrl: '/blog',
   source: blog,
 });

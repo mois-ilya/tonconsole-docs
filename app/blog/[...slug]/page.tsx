@@ -1,11 +1,11 @@
-import { blogLoader } from '@/source';
+import { blogSource } from '@/source';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
   const params = await props.params;
-  const page = blogLoader.getPage(params.slug);
+  const page = blogSource.getPage(params.slug);
   if (!page) notFound();
 
   return (
@@ -35,7 +35,7 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
 }
 
 export async function generateStaticParams() {
-  return blogLoader.getPages().map((page) => ({
+  return blogSource.getPages().map((page) => ({
     slug: page.slugs,
   }));
 }
@@ -44,7 +44,7 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const page = blogLoader.getPage(params.slug);
+  const page = blogSource.getPage(params.slug);
   if (!page) notFound();
 
   return {

@@ -1,8 +1,8 @@
-import { blogLoader } from '@/source';
+import { blogSource } from '@/source';
 import Link from 'next/link';
 
 export default function BlogIndex() {
-  const posts = blogLoader.getPages();
+  const posts = blogSource.getPages();
 
   return (
     <main className="container py-12">
