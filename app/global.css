@@ -1,14 +1,14 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/style.css';
 
-:root {
-  /* TonAPI Blue Accent Color */
-  --primary: 212 71% 52%; /* #2c7edb */
-  --primary-foreground: 0 0% 100%;
+@theme {
+  /* TonAPI Blue Accent Color - #2c7edb (hsl: 212, 71%, 52%) */
+  --color-fd-primary: 212 71% 52%;
+  --color-fd-primary-foreground: 0 0% 100%;
 }
 
 .dark {
   /* TonAPI Blue Accent Color for Dark Mode */
-  --primary: 212 71% 52%; /* #2c7edb */
-  --primary-foreground: 0 0% 100%;
+  --color-fd-primary: 212 71% 52%;
+  --color-fd-primary-foreground: 0 0% 100%;
 }
