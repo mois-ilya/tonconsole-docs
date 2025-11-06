@@ -1,38 +1,28 @@
 {
-  "name": "docs-tonapps",
-  "version": "1.0.0",
+  "name": "tonconsole-docs",
+  "version": "2.0.0",
+  "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export -o dist/",
-    "gh-deploy": "GHPAGES=1 next build && next export -o dist/ && npx gh-pages -d dist",
-    "start": "next start",
-    "format": "prettier --write \"**/*.{js,ts,tsx,json}\""
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "@next/third-parties": "^15.1.4",
-    "classnames": "^2.3.2",
-    "next": "^13.5.6",
-    "nextra": "^2.13.4",
-    "nextra-theme-docs": "^2.13.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "fumadocs-core": "^16.0.7",
+    "fumadocs-mdx": "^13.0.5",
+    "fumadocs-ui": "^16.0.7",
+    "lucide-react": "^0.552.0",
+    "next": "^16.0.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "shiki": "^3.15.0"
   },
   "devDependencies": {
-    "@types/node": "18.15.11",
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.21",
-    "prettier": "^3.3.3",
-    "tailwindcss": "^3.3.1",
-    "typescript": "^5.5.0"
-  },
-  "prettier": {
-    "tabWidth": 2,
-    "indent_style": "space",
-    "end_of_line": "lf",
-    "semi": true,
-    "singleQuote": true,
-    "jsxSingleQuote": false,
-    "bracketSameLine": true,
-    "printWidth": 100
+    "@tailwindcss/postcss": "^4.1.16",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "tailwindcss": "^4.1.16",
+    "typescript": "^5.9.3"
   }
 }

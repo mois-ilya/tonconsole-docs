@@ -1,0 +1,14 @@
+{
+  "title": "TonAPI",
+  "pages": [
+    "index",
+    "rest-api",
+    "webhooks-api",
+    "streaming-api",
+    "graphql",
+    "sdk",
+    "cookbook",
+    "liteservers",
+    "api-v2"
+  ]
+}

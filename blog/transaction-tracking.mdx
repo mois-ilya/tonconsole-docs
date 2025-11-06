@@ -1,0 +1,233 @@
+---
+title: Tracking TON Transactions - From Message to Trace
+description: Learn how to properly track transactions in TON blockchain, from message hashes to traces
+date: 2024-01-20
+author: TON Console Team
+---
+
+Alright — let's break down how the hell you're supposed to track a transaction in TON. If you've ever used Ethereum or Bitcoin, you might think: _"Yeah, I just grab the hash of the transaction and I'm good."_ Well, surprise: TON doesn't work that way. Not even close.
+
+If you don't clearly get what an **account**, **transaction**, **message**, **trace**, **cell**, or **cell-hash** is — or what the wallet actually signs — buckle up and read the glossary.
+
+<details>
+<summary>Glossary (quick refresher)</summary>
+
+**Account** – Basic unit of information storage in the blockchain; a record in the workchain state containing metadata, balance, and possibly code and data.
+
+**Messages** – Data packets exchanged between accounts (internal) or between accounts and entities outside the blockchain (external-in or external-out).
+
+**Transactions** – Atomic changes to an account's state. Typically (excluding system transactions), they're reactions to incoming messages. The exact validator processing time can't be predetermined, thus neither the timestamp nor hash can be known in advance.
+
+*(Transactions can shoot out internal messages, which go to other accounts, triggering more transactions, and so on – it's like digital dominoes.)*
+
+**Trace** – It's a tree. Nodes = transactions. Edges = messages. The root? Usually a response to an external-in.
+
+Want examples? Go check [tonviewer.com](https://tonviewer.com) – some are [simple](https://tonviewer.com/transaction/6c38b3e3460d6076ae388f6b4ccaaf5cd23587137f171447693d3f5148777513), others [branch out beautifully](https://tonviewer.com/transaction/9804e0cfdfe50987e1d24c7c8ec4c9a2d4361e79e3e949ca36cf8d4aa313d990), and some are just [degenerate one-offs](https://tonviewer.com/transaction/ba9202b8d389def350a56f296812b90e8d0222a49be29a6fdce756ef65e11ed5).
+
+![Example of trace in TON blockchain](/assets/transaction-tracking-trace.png)
+
+**Cell** – The atomic unit in TON. Up to 1023 bits and up to 4 refs to other cells. Everything lives in cells – accounts, messages, transactions, even blocks. And each cell has its own hash. That hash is how you track stuff.
+
+</details>
+
+## The Problem
+
+You can't know the transaction hash before it happens. Here's why:
+
+1. **Unpredictable Processing Time**: Validators don't process transactions on a schedule. There's no "next block at X seconds." It just... happens.
+2. **Unknown Timestamp and State**: You don't know when exactly your transaction will run or what the blockchain state will be at that moment.
+3. **Hash Depends on Everything**: The transaction hash includes the timestamp, involved accounts, blockchain state, and more. All unknowable in advance.
+
+So what _can_ you know?
+
+## What You CAN Know in Advance
+
+### 1. The Message BOC
+
+When a wallet sends a transaction, it signs an **external message**. This message is what gets sent to the blockchain.
+
+The message is serialized into a **BOC** (Bag of Cells) — essentially a binary blob. You **can** compute the BOC before sending it.
+
+```ts
+const boc = await wallet.createTransfer({
+  seqno: await wallet.getSeqno(),
+  secretKey: keyPair.secretKey,
+  messages: [
+    internal({
+      to: destination,
+      value: toNano('0.01'),
+      body: comment('Hello, TON!'),
+    }),
+  ],
+});
+```
+
+From the BOC, you can derive:
+- **BOC hash**: `sha256(boc)`
+- **Message hash**: hash of the message cell itself
+
+✅ **This you know before sending.**
+
+---
+
+## Tracking Methods
+
+### Method 1: Track by Message BOC
+
+**Idea**: Use TonAPI to track the external message you sent.
+
+```ts
+const result = await tonapi.blockchain.execGetBlockchainRawAccount({
+  accountId: wallet.address.toString(),
+});
+
+// Parse the BOC and extract message hash
+const msgHash = cell.hash().toString('base64');
+```
+
+**Pros:**
+- You can calculate this hash immediately
+- No need to wait for confirmation
+
+**Cons:**
+- Requires parsing the BOC
+- Only tracks the initiating message, not the full trace
+
+**Use case**: Quick confirmation that your message was accepted
+
+---
+
+### Method 2: Track by Transaction Hash (After the Fact)
+
+**Idea**: Once the transaction is mined, grab its hash and track subsequent actions.
+
+```ts
+const tx = await tonapi.blockchain.getBlockchainTransactionByMessageHash({
+  msgId: messageHash,
+});
+
+console.log('Transaction hash:', tx.hash);
+```
+
+**Pros:**
+- Complete transaction data available
+- Can see the full trace
+
+**Cons:**
+- Hash unknown until after processing
+- Requires waiting
+
+**Use case**: Post-transaction analytics, wallet history
+
+---
+
+### Method 3: Webhooks (Real-Time Notifications)
+
+**Idea**: Use TonAPI webhooks to get notified when your account processes a transaction.
+
+```ts
+// Set up webhook via TonAPI
+// You'll receive a POST request when transaction happens
+{
+  "account_id": "0:abc...",
+  "tx_hash": "xyz...",
+  "lt": 12345,
+  // ... full transaction details
+}
+```
+
+**Pros:**
+- Real-time
+- No polling required
+- Covers all account activity
+
+**Cons:**
+- Requires a server to receive webhooks
+- Not suitable for client-side only apps
+
+**Use case**: Payment processing, automated systems
+
+---
+
+## Practical Examples
+
+### TypeScript: Track by Message Hash
+
+\`\`\`ts
+import TonWeb from 'tonweb';
+import { TonClient } from 'ton';
+
+const client = new TonClient({
+  endpoint: 'https://toncenter.com/api/v2/jsonRPC',
+});
+
+async function trackTransaction(messageHash: string) {
+  while (true) {
+    const tx = await client.getTransactions(wallet.address, { limit: 10 });
+    
+    const found = tx.find(t => 
+      t.inMessage?.hash().equals(Buffer.from(messageHash, 'base64'))
+    );
+    
+    if (found) {
+      console.log('Transaction found!', found.hash().toString('hex'));
+      return found;
+    }
+    
+    await new Promise(resolve => setTimeout(resolve, 2000));
+  }
+}
+\`\`\`
+
+### Using TonAPI
+
+\`\`\`ts
+import { Api } from 'tonapi-sdk-js';
+
+const tonapi = new Api({
+  baseUrl: 'https://tonapi.io',
+  headers: {
+    Authorization: 'Bearer YOUR_API_KEY',
+  },
+});
+
+// Method 1: Track by message hash
+const tx = await tonapi.blockchain.getBlockchainTransactionByMessageHash({
+  msgId: 'your-message-hash',
+});
+
+console.log('Transaction:', tx);
+
+// Method 2: Get account transactions
+const transactions = await tonapi.blockchain.execGetBlockchainAccountTransactions({
+  accountId: walletAddress,
+  limit: 10,
+});
+\`\`\`
+
+---
+
+## Best Practices
+
+1. **Always validate addresses**: Make sure you're tracking the right account
+2. **Use message hash when possible**: It's known immediately
+3. **Implement retry logic**: Networks can be slow or congested
+4. **Track the full trace**: For complex operations (like DEX swaps), you need to follow the message chain
+5. **Use webhooks for production**: Polling is inefficient
+
+## TL;DR
+
+- **Transaction hash** = unknowable until it's mined
+- **Message BOC hash** = you can calculate this before sending
+- **Track by message hash** = fastest confirmation
+- **Track by transaction hash** = full details after the fact
+- **Use webhooks** = real-time, production-ready
+
+TON isn't Ethereum. Embrace the asynchronous nature. Track what you can, when you can.
+
+## Useful Links
+
+- [TON Documentation - Messages](https://docs.ton.org/develop/smart-contracts/guidelines/message-delivery-guarantees)
+- [TonAPI Webhooks](https://docs.tonconsole.com/tonapi/webhooks-api)
+- [TonViewer - Transaction Explorer](https://tonviewer.com)
+- [TON Center API](https://toncenter.com/api/v2/)
