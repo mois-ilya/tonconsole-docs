@@ -2,9 +2,41 @@
 title: REST API
 ---
 
-This section of the documentation covers the **TONAPI** REST API, which provides access to various services for interacting with the TON blockchain. These services allow you to perform operations on accounts, retrieve blockchain data, utilize advanced features like gasless transactions, and more.
+This API is designed to provide users with a simple and streamlined experience, eliminating the complexity of the TON blockchain. For instance, you don't need to worry about supporting all wallet standards, performing verifications, or decoding raw bits and bytes. We aim to streamline the process for you, so you can focus on utilizing the functionality of the API without getting bogged down by technical details.
+
+To prevent confusion, some data is hidden. However, if you require raw blockchain data, you can use our http-to-adnl proxy methods to fetch raw data from a light server.
+
+## Authorization
+
+All methods are available without authentication, but with a rate limit of 1 request per 4 seconds (0.24 rps).
+
+To authorize your request, you will need a token, which you can obtain from https://tonconsole.com/. Here is an example of a token: `AGZVOXZ3SLHOAA4TRVL4DWQ5DUZK25MSEIGXAFHZ43TMPGXQ6NZZXEWROYSJHCONGSFITLI`.
+
+To pass the token in your request, please add the Authorization HTTP header with the "Bearer scheme." Here is an example:
+
+```shell
+curl \
+ -H 'Authorization: Bearer AGZVOXZ3SLHOAA4TRVL4DWQ5DUZK25MSEIGXAFHZ43TMPGXQ6NZZXEWROYSJHCONGSFITLI' \
+ 'https://tonapi.io/v2/blockchain/masterchain-head'
+```
+
+## Limits
+The rate limits for all of your issued tokens are the same and match the plan you have. The rate limits are the same for both the testnet and mainnet (if you're paying for a 10 rps plan, you'll get 10 rps in the testnet and 10 rps in the mainnet).
+
+Learn more about tiers and limit on [TonConsole](https://tonconsole.com/tonapi/pricing)
+
+## Launch your own TonAPI node
+There is a separate limited open-source version of TonAPI available at https://github.com/tonkeeper/opentonapi. This version does not require a full blockchain index.
+
+Some data that requires full node sync, such as (jettons, NFTs, and full account information), may not be visible through this version of TonAPI, but all of the basic functionality is in place.
+
+Opentonapi can also work on private light server nodes as well as public ones.
 
 ---
+
+## API Endpoints
+
+This section of the documentation covers the **TONAPI** REST API, which provides access to various services for interacting with the TON blockchain. These services allow you to perform operations on accounts, retrieve blockchain data, utilize advanced features like gasless transactions, and more.
 
 TONAPI provides two base endpoints depending on the target network:
 
@@ -12,6 +44,8 @@ TONAPI provides two base endpoints depending on the target network:
 - **Testnet**: [`https://testnet.tonapi.io`](https://testnet.tonapi.io)
 
 ---
+
+## Resources
 
 To facilitate integration and testing of the REST API, the following resources are available:
 
