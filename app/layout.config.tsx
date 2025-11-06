@@ -14,7 +14,7 @@ export const baseOptions: BaseLayoutProps = {
         />
         <span className="text-[15px]">
           <span className="font-bold">TON</span>
-          <span className="font-semibold">API</span>
+          <span className="font-normal ml-0.5">API</span>
         </span>
       </div>
     ),

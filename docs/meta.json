@@ -1,4 +1,30 @@
 {
   "title": "Documentation",
-  "pages": ["index", "tonapi", "tonconsole", "tonkeeper", "payment-processing"]
+  "pages": [
+    "---Introduction---",
+    "introduction/quick-start",
+    "introduction/what-is-tonapi",
+    "---TonAPI---",
+    "tonapi",
+    "tonapi/rest-api",
+    "tonapi/webhooks-api",
+    "tonapi/streaming-api",
+    "tonapi/graphql",
+    "tonapi/sdk",
+    "tonapi/cookbook",
+    "tonapi/liteservers",
+    "tonapi/api-v2",
+    "---TON Console---",
+    "tonconsole/analytics",
+    "tonconsole/invoices",
+    "tonconsole/jettons",
+    "tonconsole/nft",
+    "tonconsole/tonkeeper-messages",
+    "---Tonkeeper---",
+    "tonkeeper/deep-linking",
+    "tonkeeper/signer",
+    "---Payment Processing---",
+    "payment-processing",
+    "payment-processing/tonapi-embed"
+  ]
 }

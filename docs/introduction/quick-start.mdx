@@ -1,0 +1,94 @@
+---
+title: Quick Start
+description: Get started with TONAPI in minutes
+---
+
+# Quick Start
+
+Get up and running with TONAPI in just a few minutes. This guide will walk you through the essential steps to start building on TON blockchain.
+
+## Prerequisites
+
+Before you begin, you'll need:
+
+- Basic understanding of REST APIs
+- An API key (optional for basic usage, required for higher limits)
+- Your preferred programming language and HTTP client
+
+## Your First API Call
+
+Let's make your first request to TONAPI. We'll fetch information about a TON account:
+
+```bash
+curl https://tonapi.io/v2/accounts/EQD0vdSA_NedR9uvbgN9EikRX-suesDxGeFg69XQMavfLqIw
+```
+
+This will return detailed information about the account, including balance, status, and more.
+
+## Get Your API Key
+
+For production use and higher rate limits, you'll need an API key:
+
+1. Visit [TON Console](https://tonconsole.com)
+2. Sign up or log in to your account
+3. Navigate to API Keys section
+4. Create a new API key for your project
+
+Once you have your key, include it in your requests:
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  https://tonapi.io/v2/accounts/EQD0vdSA_NedR9uvbgN9EikRX-suesDxGeFg69XQMavfLqIw
+```
+
+## Use SDK for Your Language
+
+TONAPI provides SDKs for popular programming languages:
+
+### JavaScript/TypeScript
+
+```bash
+npm install @ton-api/client
+```
+
+```typescript
+import { TonApiClient } from '@ton-api/client';
+
+const client = new TonApiClient({
+  apiKey: 'YOUR_API_KEY'
+});
+
+const account = await client.accounts.getAccount(
+  'EQD0vdSA_NedR9uvbgN9EikRX-suesDxGeFg69XQMavfLqIw'
+);
+```
+
+### Python
+
+```bash
+pip install tonapi
+```
+
+```python
+from tonapi import TonApi
+
+client = TonApi(api_key='YOUR_API_KEY')
+account = client.accounts.get_account(
+  'EQD0vdSA_NedR9uvbgN9EikRX-suesDxGeFg69XQMavfLqIw'
+)
+```
+
+## Next Steps
+
+Now that you've made your first API call, explore more features:
+
+- [What is TONAPI](/docs/introduction/what-is-tonapi) - Learn about TONAPI capabilities
+- [REST API Reference](/docs/tonapi/rest-api) - Explore all available endpoints
+- [SDK Guide](/docs/tonapi/sdk) - Deep dive into SDK features
+- [Cookbook](/docs/tonapi/cookbook) - Real-world examples and recipes
+
+## Need Help?
+
+- Join our [Telegram community](https://t.me/tonRocketChat)
+- Check out [API documentation](/docs/tonapi)
+- Contact support at [support@tonkeeper.com](mailto:support@tonkeeper.com)
