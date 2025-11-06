@@ -32,6 +32,38 @@ const clients = [
   { name: 'unstoppable', href: 'https://unstoppable.money' }
 ];
 
+// Component for typing animation
+function CodeTypingAnimation({ code }: { code: typeof codeExamples[0] }) {
+  const [displayedCode, setDisplayedCode] = useState(code.json.slice(0, 1));
+
+  useEffect(() => {
+    let i = 1;
+    const timer = setInterval(() => {
+      if (i > code.json.length) {
+        clearInterval(timer);
+      }
+      setDisplayedCode(code.json.slice(0, i));
+      i += 3;
+    }, 10);
+
+    return () => clearInterval(timer);
+  }, [code]);
+
+  return (
+    <div style={{ position: 'relative', overflow: 'hidden', borderRadius: '16px', minWidth: '60%', maxWidth: '60%', height: '330px', maxHeight: '330px' }} className="code-container">
+      <div style={{ position: 'absolute', content: '', width: '101%', height: '101%', background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0) 40%, var(--backgroundPrimary) 80%, var(--backgroundPrimary) 100%)', zIndex: 1, pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', content: '', width: '101%', height: '101%', background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, var(--backgroundPrimary) 100%)', zIndex: 1, pointerEvents: 'none' }} />
+      <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', borderRadius: '16px' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', padding: '20px 12px 0 20px' }}>
+          <div className="api2 text-mono" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1px 10px', borderRadius: '6px', width: '40px', border: '0.5px solid var(--backgroundBlue)', background: 'var(--backgroundBlue)', color: 'var(--accentBlue)' }}>GET</div>
+          <div className="api1 text-mono">{code.path}</div>
+        </div>
+        <pre className="body3 text-mono" style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', overflow: 'auto', padding: '20px', margin: 0, color: 'var(--constantWhite)' }}><code>{displayedCode}</code></pre>
+      </div>
+    </div>
+  );
+}
+
 export default function HomePage() {
   const [selectedCode, setSelectedCode] = useState(codeExamples[0]);
   const [codeIndex, setCodeIndex] = useState(0);
@@ -63,8 +95,14 @@ export default function HomePage() {
   };
 
   return (
-    <main style={{ flex: 1, background: 'var(--backgroundPrimary)', color: 'var(--constantWhite)' }}>
-      <div className="container mx-auto px-4 py-16 sm:py-24" style={{ maxWidth: '1280px' }}>
+    <main style={{ flex: 1, background: 'hsl(var(--background))', color: 'hsl(var(--foreground))', position: 'relative', overflow: 'hidden' }}>
+      {/* Gradient Background */}
+      <div style={{ position: 'absolute', width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', width: '100%', height: '80%', top: 0, transform: 'translateY(-55%)', background: 'radial-gradient(circle, #001dc2 0, #001dc2 15%, transparent 65%, transparent 100%)' }} />
+        <div style={{ position: 'absolute', width: '100%', height: '80%', bottom: 0, transform: 'translateY(55%)', background: 'radial-gradient(circle, #001dc2 0, #001dc2 15%, transparent 65%, transparent 100%)' }} />
+      </div>
+
+      <div className="container mx-auto px-4 py-16 sm:py-24" style={{ maxWidth: '1280px', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '120px' }} className="main-sections">
 
           {/* 1. Title Section */}
@@ -83,8 +121,8 @@ export default function HomePage() {
                 <Image src="/icons/ic-telegram-16.svg" alt="" width={16} height={16} />
                 Connect and Try
               </Link>
-              <Link href="https://docs.tonconsole.com?utm_source=tonapi.io" target="_blank" className="button-secondary"
-                style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 24px', borderRadius: '40px', background: 'var(--linearPrimary)', color: 'var(--constantWhite)', fontWeight: 500, fontSize: '16px', lineHeight: '24px', border: '0.5px solid var(--borderPrimary)', cursor: 'pointer', textDecoration: 'none' }}>
+              <Link href="/docs" className="button-secondary"
+                style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 24px', borderRadius: '40px', background: 'var(--linearPrimary)', color: 'hsl(var(--foreground))', fontWeight: 500, fontSize: '16px', lineHeight: '24px', border: '0.5px solid var(--borderPrimary)', cursor: 'pointer', textDecoration: 'none' }}>
                 Documentation
               </Link>
             </div>
@@ -99,8 +137,8 @@ export default function HomePage() {
                   Our API service helps developers build dApps, create custom blockchain solutions, and leverage robust tools for development on the TON blockchain.
                 </p>
               </div>
-              <Link href="https://docs.tonconsole.com?utm_source=tonapi.io" target="_blank" className="button-secondary"
-                style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 24px', borderRadius: '40px', background: 'var(--linearPrimary)', color: 'var(--constantWhite)', fontWeight: 500, fontSize: '16px', border: '0.5px solid var(--borderPrimary)', alignSelf: 'flex-start', textDecoration: 'none' }}>
+              <Link href="/docs" className="button-secondary"
+                style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 24px', borderRadius: '40px', background: 'var(--linearPrimary)', color: 'hsl(var(--foreground))', fontWeight: 500, fontSize: '16px', border: '0.5px solid var(--borderPrimary)', alignSelf: 'flex-start', textDecoration: 'none' }}>
                 Documentation
               </Link>
             </div>
@@ -130,11 +168,11 @@ export default function HomePage() {
             <div className="features-grid" style={{ display: 'grid', gridTemplateAreas: `'streaming streaming streaming streaming rest rest rest rest webhooks webhooks webhooks webhooks' 'sdk sdk sdk sdk sdk sdk sdk sdk liteservers liteservers liteservers liteservers' 'aplications aplications aplications rps rps rps graphql graphql graphql opensource opensource opensource'`, gap: '16px', gridAutoColumns: '1fr' }}>
 
               {/* Streaming API */}
-              <Link href="https://docs.tonconsole.com/tonapi/streaming-api?utm_source=tonapi.io" target="_blank" className="card-base"
+              <Link href="/docs/tonapi/streaming-api" className="card-base"
                 style={{ gridArea: 'streaming', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px 24px 18px 24px', gap: '16px', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', textDecoration: 'none' }}>
                 <Image src="/icons/ic-streaming.svg" alt="" width={64} height={64} />
                 <div>
-                  <h3 className="label1" style={{ color: 'var(--constantWhite)' }}>Streaming API</h3>
+                  <h3 className="label1" style={{ color: 'hsl(var(--foreground))' }}>Streaming API</h3>
                   <p className="body2" style={{ color: 'var(--foregroundSecondary)' }}>Deliver dynamic, real-time data with our Streaming API — essential for applications where up-to-the-second updates matter most.</p>
                   <div className="label2" style={{ color: 'var(--accentBlue)', marginTop: '8px' }}>Explore Options</div>
                 </div>
@@ -142,13 +180,13 @@ export default function HomePage() {
 
               {/* REST API */}
               <div className="card-base" style={{ gridArea: 'rest', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px 24px 18px 24px', gap: '16px', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)' }}>
-                <Link href="https://docs.tonconsole.com/tonapi/rest-api?utm_source=tonapi.io" target="_blank" style={{ position: 'absolute', inset: 0, zIndex: 0, borderRadius: 'inherit', textIndent: '-9999px' }} aria-label="REST API">REST API</Link>
+                <Link href="/docs/tonapi/rest-api" style={{ position: 'absolute', inset: 0, zIndex: 0, borderRadius: 'inherit', textIndent: '-9999px' }} aria-label="REST API">REST API</Link>
                 <Image src="/icons/ic-rest.svg" alt="" width={64} height={64} />
                 <div>
-                  <h3 className="label1" style={{ color: 'var(--constantWhite)' }}>REST API</h3>
+                  <h3 className="label1" style={{ color: 'hsl(var(--foreground))' }}>REST API</h3>
                   <p className="body2" style={{ color: 'var(--foregroundSecondary)' }}>The core API for interacting with the TON blockchain. Manage accounts, jettons, NFTs, emulate transactions, gasless, and more.</p>
                   <div style={{ display: 'flex', flexDirection: 'row', gap: '12px', position: 'relative', zIndex: 1, marginTop: '8px' }} className="rest-links">
-                    <Link href="https://docs.tonconsole.com/tonapi/rest-api?utm_source=tonapi.io" target="_blank" className="label2" style={{ color: 'var(--accentBlue)', textDecoration: 'none' }}>Explore Options</Link>
+                    <Link href="/docs/tonapi/rest-api" className="label2" style={{ color: 'var(--accentBlue)', textDecoration: 'none' }}>Explore Options</Link>
                     <Link href="/api-v2" className="label2" style={{ color: 'var(--accentBlue)', textDecoration: 'none' }}>Swagger UI</Link>
                   </div>
                 </div>
@@ -156,13 +194,13 @@ export default function HomePage() {
 
               {/* Webhooks */}
               <div className="card-base" style={{ gridArea: 'webhooks', position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px 24px 18px 24px', gap: '16px', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)' }}>
-                <Link href="https://docs.tonconsole.com/tonapi/webhooks-api?utm_source=tonapi.io" target="_blank" style={{ position: 'absolute', inset: 0, zIndex: 0, borderRadius: 'inherit', textIndent: '-9999px' }} aria-label="Webhooks">Webhooks</Link>
+                <Link href="/docs/tonapi/webhooks-api" style={{ position: 'absolute', inset: 0, zIndex: 0, borderRadius: 'inherit', textIndent: '-9999px' }} aria-label="Webhooks">Webhooks</Link>
                 <Image src="/icons/ic-hooks.svg" alt="" width={64} height={64} />
                 <div>
-                  <h3 className="label1" style={{ color: 'var(--constantWhite)' }}>Webhooks</h3>
+                  <h3 className="label1" style={{ color: 'hsl(var(--foreground))' }}>Webhooks</h3>
                   <p className="body2" style={{ color: 'var(--foregroundSecondary)' }}>Subscribe to blockchain events and react instantly using our webhook methods. Stay in sync with what matters in real time.</p>
                   <div style={{ display: 'flex', flexDirection: 'row', gap: '12px', position: 'relative', zIndex: 1, marginTop: '8px' }} className="rest-links">
-                    <Link href="https://docs.tonconsole.com/tonapi/webhooks-api?utm_source=tonapi.io" target="_blank" className="label2" style={{ color: 'var(--accentBlue)', textDecoration: 'none' }}>Explore Options</Link>
+                    <Link href="/docs/tonapi/webhooks-api" className="label2" style={{ color: 'var(--accentBlue)', textDecoration: 'none' }}>Explore Options</Link>
                     <Link href="/webhooks-api" className="label2" style={{ color: 'var(--accentBlue)', textDecoration: 'none' }}>Swagger UI</Link>
                   </div>
                 </div>
@@ -170,9 +208,9 @@ export default function HomePage() {
 
               {/* SDK */}
               <div className="card-base card-sdk" style={{ gridArea: 'sdk', position: 'relative', display: 'flex', flexDirection: 'row', padding: '20px 24px 24px 24px', gap: '24px', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)' }}>
-                <Link href="https://docs.tonconsole.com/tonapi/sdk" target="_blank" style={{ position: 'absolute', inset: 0, zIndex: 0, borderRadius: 'inherit', textIndent: '-9999px' }} aria-label="SDK">SDK</Link>
+                <Link href="/docs/tonapi/sdk" style={{ position: 'absolute', inset: 0, zIndex: 0, borderRadius: 'inherit', textIndent: '-9999px' }} aria-label="SDK">SDK</Link>
                 <div>
-                  <h2 className="title2" style={{ color: 'var(--constantWhite)' }}>SDK</h2>
+                  <h2 className="title2" style={{ color: 'hsl(var(--foreground))' }}>SDK</h2>
                   <p className="body2" style={{ color: 'var(--foregroundSecondary)' }}>Our SDK is designed to empower developers, streamline workflows, and supercharge your application's capabilities.</p>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} className="sdk-icons">
@@ -203,11 +241,11 @@ export default function HomePage() {
               </div>
 
               {/* Liteservers */}
-              <Link href="https://docs.tonconsole.com/tonapi/liteservers" target="_blank" className="card-base"
+              <Link href="/docs/tonapi/liteservers" className="card-base"
                 style={{ gridArea: 'liteservers', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px 24px 18px 24px', gap: '16px', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', textDecoration: 'none' }}>
                 <Image src="/icons/ic-liteservers.svg" alt="" width={64} height={64} />
                 <div>
-                  <h3 className="label1" style={{ color: 'var(--constantWhite)' }}>Liteservers</h3>
+                  <h3 className="label1" style={{ color: 'hsl(var(--foreground))' }}>Liteservers</h3>
                   <p className="body2" style={{ color: 'var(--foregroundSecondary)' }}>Retrieve raw data from the blockchain in a trustless way with proof verification.</p>
                   <div className="label2" style={{ color: 'var(--accentBlue)', marginTop: '8px' }}>Explore Options</div>
                 </div>
@@ -232,9 +270,9 @@ export default function HomePage() {
               </div>
 
               {/* GraphQL */}
-              <Link href="https://docs.tonconsole.com/tonapi/graphql?utm_source=tonapi.io" target="_blank" className="card-small"
+              <Link href="/docs/tonapi/graphql" className="card-small"
                 style={{ gridArea: 'graphql', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '24px', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', textDecoration: 'none' }}>
-                <div className="num1" style={{ color: 'var(--constantWhite)' }}>GraphQL</div>
+                <div className="num1" style={{ color: 'hsl(var(--foreground))' }}>GraphQL</div>
                 <Image src="/icons/ic-graphql.svg" alt="" width={48} height={48} />
               </Link>
 
@@ -242,7 +280,7 @@ export default function HomePage() {
               <Link href="https://github.com/tonkeeper/opentonapi" target="_blank" className="card-small"
                 style={{ gridArea: 'opensource', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '24px', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', textDecoration: 'none' }}>
                 <div>
-                  <div className="label2" style={{ color: 'var(--constantWhite)' }}>Opensource</div>
+                  <div className="label2" style={{ color: 'hsl(var(--foreground))' }}>Opensource</div>
                   <div className="body3" style={{ color: 'var(--foregroundSecondary)' }}>Limited version</div>
                 </div>
                 <Image src="/icons/ic-github-circle.svg" alt="" width={48} height={48} />
@@ -258,7 +296,7 @@ export default function HomePage() {
                 <h2 className="title2">Request Examples</h2>
                 <p className="body1" style={{ color: 'var(--foregroundSecondary)' }}>
                   Examples are provided in various formats that will be useful for work. More information in the{' '}
-                  <Link href="https://docs.tonconsole.com/tonapi/rest-api" target="_blank" style={{ color: 'var(--accentBlue)' }}>documentation</Link>.
+                  <Link href="/docs/tonapi/rest-api" style={{ color: 'var(--accentBlue)' }}>documentation</Link>.
                 </p>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
@@ -267,23 +305,13 @@ export default function HomePage() {
                     key={example.key}
                     onClick={() => handleCodeSelect(example, i)}
                     className="body2"
-                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: '10px 16px', borderRadius: '40px', cursor: 'pointer', background: selectedCode.key === example.key ? 'var(--linearSecondary)' : 'var(--linearPrimary)', color: selectedCode.key === example.key ? 'var(--constantWhite)' : 'var(--foregroundSecondary)', border: '0.5px solid var(--borderPrimary)' }}>
+                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: '10px 16px', borderRadius: '40px', cursor: 'pointer', background: selectedCode.key === example.key ? 'var(--linearSecondary)' : 'var(--linearPrimary)', color: selectedCode.key === example.key ? 'hsl(var(--foreground))' : 'var(--foregroundSecondary)', border: '0.5px solid var(--borderPrimary)' }}>
                     {example.title}
                   </button>
                 ))}
               </div>
             </div>
-            <div style={{ position: 'relative', overflow: 'hidden', borderRadius: '16px', minWidth: '60%', maxWidth: '60%', height: '330px', maxHeight: '330px' }} className="code-container">
-              <div style={{ position: 'absolute', content: '', width: '101%', height: '101%', background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0) 40%, var(--backgroundPrimary) 80%, var(--backgroundPrimary) 100%)', zIndex: 1, pointerEvents: 'none' }} />
-              <div style={{ position: 'absolute', content: '', width: '101%', height: '101%', background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, var(--backgroundPrimary) 100%)', zIndex: 1, pointerEvents: 'none' }} />
-              <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', borderRadius: '16px' }}>
-                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', padding: '20px 12px 0 20px' }}>
-                  <div className="api2 text-mono" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1px 10px', borderRadius: '6px', width: '40px', border: '0.5px solid var(--backgroundBlue)', background: 'var(--backgroundBlue)', color: 'var(--accentBlue)' }}>GET</div>
-                  <div className="api1 text-mono">{selectedCode.path}</div>
-                </div>
-                <pre className="body3 text-mono" style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', overflow: 'auto', padding: '20px', margin: 0, color: 'var(--constantWhite)' }}><code>{selectedCode.json}</code></pre>
-              </div>
-            </div>
+            <CodeTypingAnimation key={selectedCode.key} code={selectedCode} />
           </section>
 
           {/* 5. Console Section */}
@@ -292,11 +320,11 @@ export default function HomePage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} className="console-content">
 
               {/* Tonkeeper Messages - large card */}
-              <Link href="https://docs.tonconsole.com/tonconsole/tonkeeper-messages?utm_source=tonapi.io" target="_blank" className="console-card-row"
-                style={{ display: 'flex', flexDirection: 'row', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', position: 'relative', textDecoration: 'none' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', padding: '20px 24px 18px 24px', gap: '24px' }} className="console-card-text">
+              <Link href="/docs/tonconsole/tonkeeper-messages" className="console-card-row"
+                style={{ display: 'flex', flexDirection: 'row', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', position: 'relative', textDecoration: 'none', overflow: 'hidden' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', padding: '20px 24px 18px 24px', gap: '24px', zIndex: 2 }} className="console-card-text">
                   <div>
-                    <div className="label1" style={{ color: 'var(--constantWhite)' }}>Tonkeeper Messages</div>
+                    <div className="label1" style={{ color: 'hsl(var(--foreground))' }}>Tonkeeper Messages</div>
                     <div className="body2" style={{ color: 'var(--foregroundSecondary)', maxWidth: '490px' }}>Push notifications for users who have connected to your dApp via Tonkeeper. Notifications can help triple your DAU and double your Daily Revenue.</div>
                   </div>
                   <div className="label2" style={{ color: 'var(--accentBlue)' }}>Explore Options</div>
@@ -304,7 +332,7 @@ export default function HomePage() {
                 <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'center', flex: 1, minWidth: '50%' }} className="image-container">
                   <Image src="/images/console/messages.png" alt="Tonkeeper Messages" width={540} height={320} style={{ width: '100%', height: '100%', objectFit: 'cover' }} className="hide-mobile" />
                   <Image src="/images/console/messages2.png" alt="Tonkeeper Messages" width={358} height={332} style={{ width: '100%', height: 'auto' }} className="hide-desktop" />
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', position: 'absolute', left: '20%' }} className="blur-container">
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', position: 'absolute', left: '20%', zIndex: 3 }} className="blur-container">
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '3px', width: '122px', height: '122px', border: '1px solid var(--borderPrimary)', background: 'var(--linearTertiary)', backdropFilter: 'blur(20px)', borderRadius: '12px' }}>
                       <div style={{ fontWeight: 400, fontSize: '42px', lineHeight: '42px', color: 'var(--constantWhite)' }}>х2</div>
                       <div style={{ fontWeight: 300, fontSize: '21px', lineHeight: '30px', color: 'var(--foregroundSecondary)' }}>revenue</div>
@@ -319,16 +347,16 @@ export default function HomePage() {
 
               <div style={{ display: 'flex', flexDirection: 'row', gap: '16px' }} className="console-row">
                 {/* Airdrop */}
-                <div className="console-card" style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', position: 'relative' }}>
+                <div className="console-card" style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', position: 'relative', flex: 1 }}>
                   <Link href="https://tonapi.io/airdrop" target="_blank" style={{ position: 'absolute', inset: 0, zIndex: 0, borderRadius: 'inherit', textIndent: '-9999px' }} aria-label="Airdrop">Airdrop</Link>
                   <Image src="/images/console/airdrop.png" alt="Airdrop" width={540} height={148} style={{ width: '100%', height: 'auto' }} />
                   <div style={{ display: 'flex', flexDirection: 'column', padding: '20px 24px 18px 24px', gap: '24px' }} className="console-card-text">
                     <div>
-                      <div className="label1" style={{ color: 'var(--constantWhite)' }}>TONAPI Airdrop</div>
+                      <div className="label1" style={{ color: 'hsl(var(--foreground))' }}>TONAPI Airdrop</div>
                       <div className="body2" style={{ color: 'var(--foregroundSecondary)' }}>Simplify airdrop with our solution on the TON Blockchain. Distribute Jettons to millions of users quickly, without the need for coding. Without extra fees for you.</div>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px', position: 'relative', zIndex: 1 }}>
-                      <Link href="https://docs.tonconsole.com/tonconsole/jettons/airdrop?utm_source=tonapi.io" target="_blank" className="label2" style={{ color: 'var(--accentBlue)', textDecoration: 'none' }}>Documentation</Link>
+                      <Link href="/docs/tonconsole/jettons/airdrop" className="label2" style={{ color: 'var(--accentBlue)', textDecoration: 'none' }}>Documentation</Link>
                       <Link href="https://tonapi.io/airdrop" className="label2" style={{ color: 'var(--accentBlue)', textDecoration: 'none' }}>Learn more</Link>
                     </div>
                   </div>
@@ -336,11 +364,11 @@ export default function HomePage() {
 
                 {/* Jetton Minter */}
                 <Link href="https://tonconsole.com/jetton/new-jetton?utm_source=tonapi.io" target="_blank" className="console-card"
-                  style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', textDecoration: 'none' }}>
+                  style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', textDecoration: 'none', flex: 1 }}>
                   <Image src="/images/console/minter.png" alt="Jetton Minter" width={540} height={148} style={{ width: '100%', height: 'auto' }} />
                   <div style={{ display: 'flex', flexDirection: 'column', padding: '20px 24px 18px 24px', gap: '24px' }} className="console-card-text">
                     <div>
-                      <div className="label1" style={{ color: 'var(--constantWhite)' }}>Jetton Minter</div>
+                      <div className="label1" style={{ color: 'hsl(var(--foreground))' }}>Jetton Minter</div>
                       <div className="body2" style={{ color: 'var(--foregroundSecondary)' }}>Create tokens quickly and easily. A simple tool designed for token creation, giving you full control over the issuance and management of your jettons.</div>
                     </div>
                     <div className="label2" style={{ color: 'var(--accentBlue)' }}>Explore Options</div>
@@ -350,12 +378,12 @@ export default function HomePage() {
 
               <div style={{ display: 'flex', flexDirection: 'row', gap: '16px' }} className="console-row">
                 {/* cNFT */}
-                <Link href="https://docs.tonconsole.com/tonconsole/nft/cnft?utm_source=tonapi.io" target="_blank" className="console-card"
-                  style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', textDecoration: 'none' }}>
+                <Link href="/docs/tonconsole/nft/cnft" className="console-card"
+                  style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', textDecoration: 'none', flex: 1 }}>
                   <Image src="/images/console/cnft.png" alt="cNFT" width={540} height={148} style={{ width: '100%', height: 'auto' }} />
                   <div style={{ display: 'flex', flexDirection: 'column', padding: '20px 24px 18px 24px', gap: '24px' }} className="console-card-text">
                     <div>
-                      <div className="label1" style={{ color: 'var(--constantWhite)' }}>cNFT</div>
+                      <div className="label1" style={{ color: 'hsl(var(--foreground))' }}>cNFT</div>
                       <div className="body2" style={{ color: 'var(--foregroundSecondary)' }}>Simplify the process to index mintless NFTs with our cNFT indexer. This powerful tool allows you to build large-scale NFT collections quickly and at a lower cost, giving you more flexibility for your NFT projects.</div>
                     </div>
                     <div className="label2" style={{ color: 'var(--accentBlue)' }}>Explore Options</div>
@@ -363,12 +391,12 @@ export default function HomePage() {
                 </Link>
 
                 {/* TON Analytics */}
-                <Link href="https://docs.tonconsole.com/tonconsole/analytics/examples?utm_source=tonapi.io" target="_blank" className="console-card"
-                  style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', textDecoration: 'none' }}>
+                <Link href="/docs/tonconsole/analytics/examples" className="console-card"
+                  style={{ display: 'flex', flexDirection: 'column', borderRadius: '12px', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', textDecoration: 'none', flex: 1 }}>
                   <Image src="/images/console/query.png" alt="TON Analytics" width={540} height={148} style={{ width: '100%', height: 'auto' }} />
                   <div style={{ display: 'flex', flexDirection: 'column', padding: '20px 24px 18px 24px', gap: '24px' }} className="console-card-text">
                     <div>
-                      <div className="label1" style={{ color: 'var(--constantWhite)' }}>TON Analytics</div>
+                      <div className="label1" style={{ color: 'hsl(var(--foreground))' }}>TON Analytics</div>
                       <div className="body2" style={{ color: 'var(--foregroundSecondary)' }}>Unlock the power of Blockchain analysis with TonAnalytics. Run SQL queries on the TonAPI indexer database to analyze blockchain data effortlessly.</div>
                     </div>
                     <div className="label2" style={{ color: 'var(--accentBlue)' }}>Explore Options</div>
@@ -424,7 +452,7 @@ export default function HomePage() {
                     href={plan.title === 'Custom' ? 'https://t.me/tonrostislav' : 'https://tonconsole.com?utm_source=tonapi.io'}
                     target="_blank"
                     className="pricing-card"
-                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', position: 'relative', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', color: 'var(--constantWhite)', borderRadius: '12px', padding: '16px 24px', textDecoration: 'none' }}>
+                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', position: 'relative', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', color: 'hsl(var(--foreground))', borderRadius: '12px', padding: '16px 24px', textDecoration: 'none' }}>
                     <div>
                       <div className="body2" style={{ color: 'var(--foregroundSecondary)' }}>{plan.title}</div>
                       <div className="num1">{plan.price}</div>
@@ -458,7 +486,7 @@ export default function HomePage() {
                     href={plan.title === 'Custom' ? 'https://t.me/tonrostislav' : 'https://tonconsole.com?utm_source=tonapi.io'}
                     target="_blank"
                     className="pricing-card"
-                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', position: 'relative', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', color: 'var(--constantWhite)', borderRadius: '12px', padding: '16px 24px', textDecoration: 'none' }}>
+                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', position: 'relative', background: 'var(--linearPrimary)', border: '0.5px solid var(--borderPrimary)', color: 'hsl(var(--foreground))', borderRadius: '12px', padding: '16px 24px', textDecoration: 'none' }}>
                     <div>
                       <div className="body2" style={{ color: 'var(--foregroundSecondary)' }}>{plan.title}</div>
                       <div className="num1">{plan.price}</div>
@@ -483,18 +511,18 @@ export default function HomePage() {
             {[
               { title: 'Tonviewer', text: 'Explore transactions, contracts, NFTs, Jettons, etc.', href: 'https://tonviewer.com?utm_source=tonapi.io', icon: 'ic-tonviewer.svg' },
               { title: 'Console', text: 'Console offers reliable, scalable TON blockchain services.', href: 'https://tonconsole.com?utm_source=tonapi.io', icon: 'ic-console.svg' },
-              { title: 'Documentation', text: 'The technical documentation and guides', href: 'https://docs.tonconsole.com?utm_source=tonapi.io', icon: 'ic-docs.svg' }
+              { title: 'Documentation', text: 'The technical documentation and guides', href: '/docs', icon: 'ic-docs.svg' }
             ].map((service, i) => (
               <Link
                 key={service.title}
                 href={service.href}
-                target="_blank"
+                target={service.href.startsWith('/') ? undefined : '_blank'}
                 className="service-item"
                 style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: '15px 24px 15px 28px', background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%)', flex: 1, borderRight: i < 2 ? '0.5px solid var(--borderPrimary)' : 'none', textDecoration: 'none' }}>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '16px' }}>
                   <Image src={`/icons/${service.icon}`} alt="" width={48} height={48} style={{ flexShrink: 0 }} />
                   <div>
-                    <div className="label2" style={{ color: 'var(--constantWhite)' }}>{service.title}</div>
+                    <div className="label2" style={{ color: 'hsl(var(--foreground))' }}>{service.title}</div>
                     <div className="body3" style={{ color: 'var(--foregroundSecondary)' }}>{service.text}</div>
                   </div>
                 </div>
