@@ -2,7 +2,7 @@ import { docsSource } from '@/source';
 import type { Metadata } from 'next';
 import { DocsPage, DocsBody, DocsTitle, DocsDescription } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
+import { getMDXComponents } from '@/mdx-components';
 import { LLMCopyButton, ViewOptions } from '@/components/ai/page-actions';
 import { Feedback } from '@/components/feedback';
 import { onRateAction, owner, repo } from '@/lib/github';
@@ -33,7 +33,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
         <ViewOptions markdownUrl={markdownUrl} githubUrl={githubUrl} />
       </div>
       <DocsBody>
-        <MDX components={{ ...defaultMdxComponents }} />
+        <MDX components={getMDXComponents()} />
       </DocsBody>
       <Feedback onRateAction={onRateAction} />
     </DocsPage>
