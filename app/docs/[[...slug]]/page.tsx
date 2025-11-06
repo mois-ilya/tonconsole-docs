@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/mdx-components';
 import { LLMCopyButton, ViewOptions } from '@/components/ai/page-actions';
 import { Feedback } from '@/components/feedback';
-import { onRateAction, owner, repo } from '@/lib/github';
+import { owner, repo } from '@/lib/github';
 
 export default async function Page(props: { params: Promise<{ slug?: string[] }> }) {
   const params = await props.params;
@@ -35,7 +35,7 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
       <DocsBody>
         <MDX components={getMDXComponents()} />
       </DocsBody>
-      <Feedback onRateAction={onRateAction} />
+      <Feedback />
     </DocsPage>
   );
 }

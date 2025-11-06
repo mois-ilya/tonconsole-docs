@@ -36,16 +36,23 @@ interface Result extends Feedback {
   response?: ActionResponse;
 }
 
-export function Feedback({
-  onRateAction,
-}: {
-  onRateAction: (url: string, feedback: Feedback) => Promise<ActionResponse>;
-}) {
+export function Feedback() {
   const url = usePathname();
   const [previous, setPrevious] = useState<Result | null>(null);
   const [opinion, setOpinion] = useState<'good' | 'bad' | null>(null);
   const [message, setMessage] = useState('');
   const [isPending, startTransition] = useTransition();
+
+  // Client-side feedback handler (compatible with static export)
+  const onRateAction = async (url: string, feedback: Feedback): Promise<ActionResponse> => {
+    // Log feedback for now
+    console.log('Feedback received:', { url, feedback });
+
+    // Return a GitHub URL pointing to the issues page
+    return {
+      githubUrl: 'https://github.com/tonkeeper/tonconsole-docs/issues',
+    };
+  };
 
   useEffect(() => {
     const item = localStorage.getItem(`docs-feedback-${url}`);

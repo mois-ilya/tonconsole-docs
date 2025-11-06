@@ -7,8 +7,7 @@ export async function onRateAction(
   url: string,
   feedback: Feedback,
 ): Promise<ActionResponse> {
-  'use server';
-
+  // Note: 'use server' removed for static export compatibility
   // Log feedback for now - you can integrate with GitHub API later
   console.log('Feedback received:', { url, feedback });
 
