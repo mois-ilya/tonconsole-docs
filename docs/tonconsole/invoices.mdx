@@ -2,6 +2,8 @@
 title: TON Payment tracker
 ---
 
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+
 The service provides tools for tracking specific transactions in the blockchain. It supports TON and USDT, allowing users to monitor the status of payments and receive updates about transaction changes through webhooks.
 
 ## Getting Started
@@ -9,20 +11,30 @@ The service provides tools for tracking specific transactions in the blockchain.
 To start using the TON Invoicing Service, follow these steps:
 
 <Steps>
+<Step>
 
-### Step 1: Register on Tonconsole
+### Register on Tonconsole
 
 Visit [TON Console](https://tonconsole.com/) and create an account.
 
-### Step 2: Send Project ID  
+</Step>
+<Step>
+
+### Send Project ID
 
 Find your `Project ID` on the [project settings](https://tonconsole.com/settings/edit-project) page and submit it via [this form](https://forms.gle/trMwmQv6YukduwKm6).
 
-### Step 3: Verification
+</Step>
+<Step>
+
+### Verification
 
 Once your Project ID is verified, you will gain access to the invoicing service.
 
-### Step 4: Register Your Application
+</Step>
+<Step>
+
+### Register Your Application
 
 To begin using the invoicing service, you must register your application through **Tonconsole**.
 
@@ -32,6 +44,7 @@ During registration, you need to specify the payment recipient's TON wallet addr
 
 If the wallet is new, **activate it by sending a small amount (e.g., `0.01 TON`) *from this wallet to any other address***.
 
+</Step>
 </Steps>
 
 ### Managing Applications
@@ -47,11 +60,18 @@ Once access is granted:
 ### Payment Creation
 
 <Steps>
-### Step 1: User Initiates Payment
+<Step>
+
+### User Initiates Payment
+
 A user starts the payment process on your website. The frontend sends a request to your backend to create an invoice.
 
-### Step 2: Create an Invoice
-Your backend makes an API request to Tonconsole using the API token.  
+</Step>
+<Step>
+
+### Create an Invoice
+
+Your backend makes an API request to Tonconsole using the API token.
 
 ```bash
 curl -X POST https://tonconsole.com/api/v1/services/invoices/invoice \
@@ -66,7 +86,11 @@ curl -X POST https://tonconsole.com/api/v1/services/invoices/invoice \
 - `currency`: Currency code (TON or USDT).
 - `description` (optional): Service-specific description visible only to you in the Tonconsole interface.
 
-### Step 3: Handle API Response
+</Step>
+<Step>
+
+### Handle API Response
+
 Tonconsole returns a response with the invoice details, including a `payment_link`. Send this link to your frontend, where it can be used in a "Pay with Tonkeeper" button or as a QR code.
 
 **Response Example:**
@@ -83,8 +107,14 @@ Tonconsole returns a response with the invoice details, including a `payment_lin
 }
 ```
 
-### Step 4: Monitor Invoice Status
+</Step>
+<Step>
+
+### Monitor Invoice Status
+
 Register a webhook to receive updates about invoice status changes. Tonconsole will send a POST request to your webhook whenever the status updates (e.g., from "pending" to "paid"). This ensures real-time tracking of payments.
+
+</Step>
 </Steps>
 
 ---

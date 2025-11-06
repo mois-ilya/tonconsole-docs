@@ -8,7 +8,6 @@
     "tonapi/rest-api",
     "tonapi/webhooks-api",
     "tonapi/streaming-api",
-    "tonapi/graphql",
     "tonapi/sdk",
     "tonapi/cookbook",
     "---Console---",
@@ -21,7 +20,7 @@
     "---Tonkeeper---",
     "tonkeeper/deep-linking",
     "tonkeeper/signer",
-    "---Payment Processing---",
+    "---Payment---",
     "payment-processing",
     "payment-processing/tonapi-embed"
   ]
