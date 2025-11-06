@@ -297,38 +297,7 @@ as their Claims will still be delayed.
 
 ### Example call Claim function from dApp
 
-<ExampleTabs>
-
-  <ExampleTab label="JavaScript">
-```javascript
-
-function claimJetton(claimId, userAddress) {
-    const claimUrl = `https://mainnet-airdrop.tonapi.io/v2/airdrop/claim/${userAddress}?id=${airdropId}`;
-    fetch(claimUrl)
-        .then((response) => response.json())
-        .then(({ claim_message  }) => {
-            tonConnectUI.sendTransaction({
-                validUntil: Math.floor(Date.now() / 1000) + 300, // 5 minutes
-                messages: [
-                    {
-                        mode: claim_message.mode,
-                        address: claimMessage.address,
-                        amount: claimMessage.amount,
-                        payload: claimMessage.payload,
-                        stateInit: claimMessage.state_init,
-                    },
-                ],
-            });
-        })
-        .catch((error) => console.error('Error:', error));
-}
-
-claimJetton('<ID of Airdrop from tonconsole>', '<User address from tonConnectUI>');
-```
-
-  </ExampleTab>
-
-</ExampleTabs>
+> **Note**: Code examples for multiple programming languages are available. Please refer to the source code repository.
 
 ### Test Claim button
 

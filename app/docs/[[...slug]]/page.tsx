@@ -8,16 +8,14 @@ export default async function Page(props: { params: Promise<{ slug?: string[] }>
   const page = docsSource.getPage(params.slug);
   if (!page) notFound();
 
+  const MDX = page.data.body;
+
   return (
-    <DocsPage>
+    <DocsPage toc={page.data.toc} full={page.data.full}>
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
-        <div className="prose prose-neutral dark:prose-invert max-w-none">
-          <p className="text-muted-foreground">
-            Content for {page.data.title} will be rendered here. MDX rendering is being configured.
-          </p>
-        </div>
+        <MDX />
       </DocsBody>
     </DocsPage>
   );
