@@ -1,0 +1,30 @@
+html {
+  --backgroundPrimary: #121212;
+  --backgroundSecondary: #f1f3f5;
+  --backgroundSecondaryHover: #e5e7ea;
+  --backgroundSecondaryOpacity: rgba(255, 255, 255, 0.04);
+  --backgroundHighlightOpacity: rgba(255, 255, 255, 0.3);
+  --backgroundHoverOpacity: rgba(255, 255, 255, 0.08);
+  --linearPrimary: linear-gradient(245deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --linearSecondary: linear-gradient(245deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+  --linearTertiary: linear-gradient(245deg, rgba(35, 35, 35, 0.12) 0%, rgba(44, 44, 44, 0.12) 100%);
+  --backgroundBlue: rgba(44, 126, 219, 0.2);
+  --backgroundGreen: rgba(21, 173, 97, 0.2);
+  --borderPrimary: rgba(255, 255, 255, 0.08);
+  --borderSecondary: rgba(131, 137, 143, 0.16);
+  --foregroundSecondary: rgba(255, 255, 255, 0.6);
+  --foregroundTertiary: #7e868f;
+  --boxShadow: 0 4px 4px rgba(0, 0, 0, 0.04), 0 4px 20px rgba(0, 0, 0, 0.12);
+  --constantWhite: #ffffff;
+  --constantBlack: #000000;
+  --accentBlue: #2c7edb;
+  --accentGreen: #15ad61;
+  --accentRed: #f53c36;
+  --accentOrange: #f59931;
+  --accentPurple: #972cf5;
+  --gradientPrimary: #001dc2;
+  --fontMono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono',
+    'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --fontSystem: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
+}

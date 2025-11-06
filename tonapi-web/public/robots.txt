@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /*
+Allow: /api-v2
+Allow: /terms
+Allow: /airdrop
+
+Sitemap: https://tonapi.io/sitemap.xml
+
+User-agent: Googlebot
+Allow: /*
+Allow: /api-v2
+Allow: /terms
+Allow: /airdrop
+
+Sitemap: https://tonapi.io/sitemap.xml
+
+User-agent: Yandex
+Allow: /*
+Allow: /api-v2
+Allow: /terms
+Allow: /airdrop
+
+Sitemap: https://tonapi.io/sitemap.xml
