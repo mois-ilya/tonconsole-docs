@@ -84,7 +84,15 @@ export default function Layout({ children }: { children: ReactNode }) {
         </noscript>
       </head>
       <body className="flex min-h-screen flex-col">
-        <RootProvider>{children}</RootProvider>
+        <RootProvider
+          search={{
+            options: {
+              type: 'static',
+            },
+          }}
+        >
+          {children}
+        </RootProvider>
       </body>
     </html>
   );
