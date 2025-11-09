@@ -3,7 +3,9 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/check-openapi.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/check-openapi.mjs",
     "build": "next build",
     "start": "next start",
     "generate:openapi": "node scripts/generate-openapi.mjs"

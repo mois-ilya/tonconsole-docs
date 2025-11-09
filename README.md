@@ -1,64 +1,212 @@
-# TON Console Documentation
+# TonConsole Documentation
 
-Migrated to Fumadocs v16 with Next.js 16.
+Official documentation for TonConsole and TonAPI, built with Fumadocs v16 and Next.js 16.
 
-## What's Done
+## Quick Start
 
-- ✅ Moved old Nextra project to `old/` directory
-- ✅ Installed latest Fumadocs, Next.js 16, Tailwind v4, React 19
-- ✅ Created new project structure with Fumadocs
-- ✅ Copied all MDX files from old project:
-  - `/docs/tonapi/` - TonAPI documentation
-  - `/docs/tonconsole/` - TON Console documentation
-  - `/docs/tonkeeper/` - Tonkeeper documentation
-  - `/docs/payment-processing/` - Payment Processing docs
-  - `/blog/` - Academy articles (sign-data, transaction-tracking)
-- ✅ Copied public assets (logos, icons, og-image)
-- ✅ Created layouts and page templates
-- ✅ Added search API endpoint
-- ✅ Created navigation metadata files
+```bash
+# Install dependencies
+pnpm install
 
-## What Needs to be Fixed
+# Start development server
+pnpm dev
 
-1. **MDX Rendering**: The MDX content rendering needs to be configured properly for Fumadocs v16. Currently pages show placeholders.
-   - Need to configure `source.config.ts` correctly
-   - Need to fix `page.data.body` access for MDX components
+# Build for production
+pnpm build
+```
 
-2. **Blog Frontmatter**: Blog posts need proper frontmatter schema with date and author fields
+## OpenAPI Documentation
 
-3. **Static Export**: Re-enable `output: 'export'` in next.config.mjs once MDX rendering works
+The REST API documentation uses an interactive OpenAPI playground. The spec is automatically managed.
 
-4. **Content Migration**: Some MDX files still reference old Nextra components:
-   - Replace Callout components with Fumadocs equivalents
-   - Update component imports in Academy articles
+### How It Works
 
-## Structure
+The OpenAPI spec (`tonapi-openapi.yml`) is automatically checked and downloaded:
+- ✅ **Before dev**: `pnpm dev` runs `predev` hook
+- ✅ **Before build**: `pnpm build` runs `prebuild` hook
+- ✅ **Auto-download**: If file doesn't exist, downloads from `https://tonapi.io/v2/openapi.yml`
+
+### Manual Operations
+
+Update OpenAPI spec manually:
+```bash
+pnpm generate:openapi
+```
+
+Or download directly:
+```bash
+wget -O tonapi-openapi.yml https://tonapi.io/v2/openapi.yml
+curl -o tonapi-openapi.yml https://tonapi.io/v2/openapi.yml
+```
+
+### Update Strategies
+
+**Option 1: Manual updates**
+```bash
+pnpm generate:openapi  # Get latest spec
+pnpm build             # Rebuild with new spec
+```
+
+**Option 2: CI/CD auto-update**
+```yaml
+# .github/workflows/build.yml
+- run: pnpm generate:openapi
+- run: pnpm build
+```
+
+**Option 3: Scheduled rebuilds** (recommended)
+```yaml
+# .github/workflows/update-api-docs.yml
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+      - run: pnpm install
+      - run: pnpm generate:openapi
+      - run: pnpm build
+```
+
+## Project Structure
 
 ```
-/app
-  /api/search - Search API endpoint
-  /blog - Academy blog section
-  /docs - Main documentation
-  /page.tsx - Homepage
-  /layout.tsx - Root layout with metadata
-
-/docs - Documentation MDX files
-/blog - Academy blog MDX files
-/public - Static assets
-/old - Old Nextra project (backup)
+.
+├── app/
+│   ├── (home)/              # Homepage (always dark theme)
+│   ├── blog/                # Academy articles
+│   ├── docs/                # Documentation pages
+│   └── api/search/          # Search API (static)
+├── docs/                    # Documentation MDX files
+│   ├── tonapi/
+│   │   └── rest-api.mdx    # Uses <APIPage> component
+│   ├── payment-processing/
+│   └── introduction/
+├── blog/                    # Academy articles MDX
+├── components/
+│   ├── mermaid.tsx         # Mermaid diagram support
+│   └── mdx-components.tsx  # Custom MDX components
+├── lib/
+│   └── openapi.ts          # OpenAPI config
+└── scripts/
+    ├── check-openapi.mjs   # Pre-hook (ensures spec exists)
+    └── generate-openapi.mjs # Manual download script
 ```
+
+## Features
+
+- 🎮 **Interactive API Playground** - Test API calls with Bearer auth
+- 🎨 **Custom Theming** - Dark homepage, toggle for docs/blog
+- 🔍 **Full-text Search** - Client-side Orama search (2.1MB index)
+- 📊 **Mermaid Diagrams** - Flowcharts and diagrams support
+- 📱 **Responsive** - Mobile-friendly design
+- ⚡ **Static Export** - Pre-rendered HTML for fast loading
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (Turbopack)
+- **Docs**: Fumadocs 16 (MDX-based)
+- **OpenAPI**: fumadocs-openapi (interactive playground)
+- **Styling**: Tailwind CSS v4
+- **Theme**: next-themes
+- **Search**: Orama (static client-side search)
+- **Diagrams**: Mermaid
+- **Deployment**: Static export (`output: 'export'`)
 
 ## Development
 
-```bash
-pnpm install
-pnpm dev
+### Adding Documentation
+
+1. Create MDX files in `docs/` or `blog/`
+2. Update `meta.json` in the directory
+3. Use available components:
+   - `<Accordions>` / `<Accordion>`
+   - `<Tabs>` / `<Tab>`
+   - `<Mermaid>`
+   - `<APIPage>` (for OpenAPI docs)
+
+Example:
+```mdx
+---
+title: My Page
+description: Page description
+---
+
+## Content
+
+<Accordions>
+<Accordion title="Click me">
+Hidden content here
+</Accordion>
+</Accordions>
 ```
 
-## Build
+### Updating API Docs
 
-Currently build fails at TypeScript check due to MDX rendering issues. This needs to be fixed first.
+The REST API page uses a single `<APIPage>` component:
 
+```mdx
+<!-- docs/tonapi/rest-api.mdx -->
+<APIPage document="./tonapi-openapi.yml" hasHead={false} />
+```
+
+To update:
+1. `pnpm generate:openapi` - Download latest spec
+2. `pnpm build` - Rebuild documentation
+3. All endpoints/schemas update automatically
+
+### Theme System
+
+- **Homepage** (`app/(home)/`): Forced dark theme
+- **Docs/Blog**: Light/dark toggle available
+- **Colors**: TonAPI brand colors in `app/global.css`
+
+## Build & Deployment
+
+### Local Build
 ```bash
 pnpm build
 ```
+
+Output: `out/` directory with static HTML
+
+### Environment
+
+No environment variables required. All configuration is in code.
+
+### Deployment
+
+Deploy the `out/` directory to:
+- Vercel
+- Netlify
+- GitHub Pages
+- Any static hosting
+
+## Scripts Reference
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Development server (auto-downloads spec) |
+| `pnpm build` | Production build (auto-downloads spec) |
+| `pnpm start` | Start production server |
+| `pnpm generate:openapi` | Manually update OpenAPI spec |
+
+## Migration Notes
+
+Migrated from Nextra to Fumadocs v16 with:
+- ✅ All documentation pages
+- ✅ Academy blog articles
+- ✅ Interactive OpenAPI docs
+- ✅ Full-text search
+- ✅ Mermaid diagram support
+- ✅ Custom theme system
+- ✅ Static site generation
+
+## License
+
+See [TonConsole](https://tonconsole.com) for license information.
