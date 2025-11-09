@@ -2,7 +2,6 @@ import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { Mermaid } from '@/components/mermaid';
 import { Accordion, Accordions, Tabs, Tab } from '@/components/mdx-components';
 import { APIPage as FumadocsAPIPage } from 'fumadocs-openapi/ui';
-import { FullAPIPage } from '@/components/full-api-page';
 import type { MDXComponents } from 'mdx/types';
 
 // Wrapper for APIPage to handle openapi instance
@@ -22,7 +21,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Tabs,
     Tab,
     APIPage,
-    FullAPIPage,
     ...components,
   };
 }

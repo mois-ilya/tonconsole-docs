@@ -1,41 +1,818 @@
 ---
-title: REST API
-description: Complete interactive API reference for TonAPI REST endpoints
+title: REST api to TON blockchain explorer
+description: Provide access to indexed TON blockchain
 full: true
+_openapi:
+  toc:
+    - depth: 2
+      title: Get Openapi Json
+      url: '#get-openapi-json'
+    - depth: 2
+      title: Get Openapi Yml
+      url: '#get-openapi-yml'
+    - depth: 2
+      title: Status
+      url: '#status'
+    - depth: 2
+      title: Get Reduced Blockchain Blocks
+      url: '#get-reduced-blockchain-blocks'
+    - depth: 2
+      title: Get Blockchain Block
+      url: '#get-blockchain-block'
+    - depth: 2
+      title: Download Blockchain Block Boc
+      url: '#download-blockchain-block-boc'
+    - depth: 2
+      title: Get Blockchain Masterchain Shards
+      url: '#get-blockchain-masterchain-shards'
+    - depth: 2
+      title: Get Blockchain Masterchain Blocks
+      url: '#get-blockchain-masterchain-blocks'
+    - depth: 2
+      title: Get Blockchain Masterchain Transactions
+      url: '#get-blockchain-masterchain-transactions'
+    - depth: 2
+      title: Get Blockchain Config From Block
+      url: '#get-blockchain-config-from-block'
+    - depth: 2
+      title: Get Raw Blockchain Config From Block
+      url: '#get-raw-blockchain-config-from-block'
+    - depth: 2
+      title: Get Blockchain Block Transactions
+      url: '#get-blockchain-block-transactions'
+    - depth: 2
+      title: Get Blockchain Transaction
+      url: '#get-blockchain-transaction'
+    - depth: 2
+      title: Get Blockchain Transaction By Message Hash
+      url: '#get-blockchain-transaction-by-message-hash'
+    - depth: 2
+      title: Get Blockchain Validators
+      url: '#get-blockchain-validators'
+    - depth: 2
+      title: Get Blockchain Masterchain Head
+      url: '#get-blockchain-masterchain-head'
+    - depth: 2
+      title: Get Blockchain Raw Account
+      url: '#get-blockchain-raw-account'
+    - depth: 2
+      title: Get Blockchain Account Transactions
+      url: '#get-blockchain-account-transactions'
+    - depth: 2
+      title: Exec Get Method For Blockchain Account
+      url: '#exec-get-method-for-blockchain-account'
+    - depth: 2
+      title: Exec Get Method With Body For Blockchain Account
+      url: '#exec-get-method-with-body-for-blockchain-account'
+    - depth: 2
+      title: Send Blockchain Message
+      url: '#send-blockchain-message'
+    - depth: 2
+      title: Get Blockchain Config
+      url: '#get-blockchain-config'
+    - depth: 2
+      title: Get Raw Blockchain Config
+      url: '#get-raw-blockchain-config'
+    - depth: 2
+      title: Blockchain Account Inspect
+      url: '#blockchain-account-inspect'
+    - depth: 2
+      title: Get Library By Hash
+      url: '#get-library-by-hash'
+    - depth: 2
+      title: Address Parse
+      url: '#address-parse'
+    - depth: 2
+      title: Get Accounts
+      url: '#get-accounts'
+    - depth: 2
+      title: Get Account
+      url: '#get-account'
+    - depth: 2
+      title: Account Dns Back Resolve
+      url: '#account-dns-back-resolve'
+    - depth: 2
+      title: Get Account Jettons Balances
+      url: '#get-account-jettons-balances'
+    - depth: 2
+      title: Get Account Jetton Balance
+      url: '#get-account-jetton-balance'
+    - depth: 2
+      title: Get Account Jettons History
+      url: '#get-account-jettons-history'
+    - depth: 2
+      title: Get Account Jetton History By I D
+      url: '#get-account-jetton-history-by-i-d'
+    - depth: 2
+      title: Get Account Nft Items
+      url: '#get-account-nft-items'
+    - depth: 2
+      title: Get Account Nft History
+      url: '#get-account-nft-history'
+    - depth: 2
+      title: Get Account Events
+      url: '#get-account-events'
+    - depth: 2
+      title: Get Account Event
+      url: '#get-account-event'
+    - depth: 2
+      title: Get Account Traces
+      url: '#get-account-traces'
+    - depth: 2
+      title: Get Account Subscriptions
+      url: '#get-account-subscriptions'
+    - depth: 2
+      title: Reindex Account
+      url: '#reindex-account'
+    - depth: 2
+      title: Search Accounts
+      url: '#search-accounts'
+    - depth: 2
+      title: Get Account Dns Expiring
+      url: '#get-account-dns-expiring'
+    - depth: 2
+      title: Get Account Public Key
+      url: '#get-account-public-key'
+    - depth: 2
+      title: Get Account Multisigs
+      url: '#get-account-multisigs'
+    - depth: 2
+      title: Get Account Diff
+      url: '#get-account-diff'
+    - depth: 2
+      title: Get Account Extra Currency History By I D
+      url: '#get-account-extra-currency-history-by-i-d'
+    - depth: 2
+      title: Get Dns Info
+      url: '#get-dns-info'
+    - depth: 2
+      title: Dns Resolve
+      url: '#dns-resolve'
+    - depth: 2
+      title: Get Domain Bids
+      url: '#get-domain-bids'
+    - depth: 2
+      title: Get All Auctions
+      url: '#get-all-auctions'
+    - depth: 2
+      title: Get Nft Collections
+      url: '#get-nft-collections'
+    - depth: 2
+      title: Get Nft Collection
+      url: '#get-nft-collection'
+    - depth: 2
+      title: Get Nft Collection Items By Addresses
+      url: '#get-nft-collection-items-by-addresses'
+    - depth: 2
+      title: Get Items From Collection
+      url: '#get-items-from-collection'
+    - depth: 2
+      title: Get Nft Items By Addresses
+      url: '#get-nft-items-by-addresses'
+    - depth: 2
+      title: Get Nft Item By Address
+      url: '#get-nft-item-by-address'
+    - depth: 2
+      title: Get Nft History By I D
+      url: '#get-nft-history-by-i-d'
+    - depth: 2
+      title: Get Trace
+      url: '#get-trace'
+    - depth: 2
+      title: Get Event
+      url: '#get-event'
+    - depth: 2
+      title: Get Jettons
+      url: '#get-jettons'
+    - depth: 2
+      title: Get Jetton Info
+      url: '#get-jetton-info'
+    - depth: 2
+      title: Get Jetton Infos By Addresses
+      url: '#get-jetton-infos-by-addresses'
+    - depth: 2
+      title: Get Jetton Holders
+      url: '#get-jetton-holders'
+    - depth: 2
+      title: Get Jetton Transfer Payload
+      url: '#get-jetton-transfer-payload'
+    - depth: 2
+      title: Get Jettons Events
+      url: '#get-jettons-events'
+    - depth: 2
+      title: Get Jetton Account History By I D
+      url: '#get-jetton-account-history-by-i-d'
+    - depth: 2
+      title: Get Extra Currency Info
+      url: '#get-extra-currency-info'
+    - depth: 2
+      title: Get Account Nominators Pools
+      url: '#get-account-nominators-pools'
+    - depth: 2
+      title: Get Staking Pool Info
+      url: '#get-staking-pool-info'
+    - depth: 2
+      title: Get Staking Pool History
+      url: '#get-staking-pool-history'
+    - depth: 2
+      title: Get Staking Pools
+      url: '#get-staking-pools'
+    - depth: 2
+      title: Get Storage Providers
+      url: '#get-storage-providers'
+    - depth: 2
+      title: Get Rates
+      url: '#get-rates'
+    - depth: 2
+      title: Get Chart Rates
+      url: '#get-chart-rates'
+    - depth: 2
+      title: Get Markets Rates
+      url: '#get-markets-rates'
+    - depth: 2
+      title: Get Ton Connect Payload
+      url: '#get-ton-connect-payload'
+    - depth: 2
+      title: Get Account Info By State Init
+      url: '#get-account-info-by-state-init'
+    - depth: 2
+      title: Ton Connect Proof
+      url: '#ton-connect-proof'
+    - depth: 2
+      title: Get Account Seqno
+      url: '#get-account-seqno'
+    - depth: 2
+      title: Get Wallet Info
+      url: '#get-wallet-info'
+    - depth: 2
+      title: Gasless Config
+      url: '#gasless-config'
+    - depth: 2
+      title: Gasless Estimate
+      url: '#gasless-estimate'
+    - depth: 2
+      title: Gasless Send
+      url: '#gasless-send'
+    - depth: 2
+      title: Get Wallets By Public Key
+      url: '#get-wallets-by-public-key'
+    - depth: 2
+      title: Get Raw Masterchain Info
+      url: '#get-raw-masterchain-info'
+    - depth: 2
+      title: Get Raw Masterchain Info Ext
+      url: '#get-raw-masterchain-info-ext'
+    - depth: 2
+      title: Get Raw Time
+      url: '#get-raw-time'
+    - depth: 2
+      title: Get Raw Blockchain Block
+      url: '#get-raw-blockchain-block'
+    - depth: 2
+      title: Get Raw Blockchain Block State
+      url: '#get-raw-blockchain-block-state'
+    - depth: 2
+      title: Get Raw Blockchain Block Header
+      url: '#get-raw-blockchain-block-header'
+    - depth: 2
+      title: Send Raw Message
+      url: '#send-raw-message'
+    - depth: 2
+      title: Get Raw Account State
+      url: '#get-raw-account-state'
+    - depth: 2
+      title: Get Raw Shard Info
+      url: '#get-raw-shard-info'
+    - depth: 2
+      title: Get All Raw Shards Info
+      url: '#get-all-raw-shards-info'
+    - depth: 2
+      title: Get Raw Transactions
+      url: '#get-raw-transactions'
+    - depth: 2
+      title: Get Raw List Block Transactions
+      url: '#get-raw-list-block-transactions'
+    - depth: 2
+      title: Get Raw Block Proof
+      url: '#get-raw-block-proof'
+    - depth: 2
+      title: Get Raw Config
+      url: '#get-raw-config'
+    - depth: 2
+      title: Get Raw Shard Block Proof
+      url: '#get-raw-shard-block-proof'
+    - depth: 2
+      title: Get Out Msg Queue Sizes
+      url: '#get-out-msg-queue-sizes'
+    - depth: 2
+      title: Get Multisig Account
+      url: '#get-multisig-account'
+    - depth: 2
+      title: Get Multisig Order
+      url: '#get-multisig-order'
+    - depth: 2
+      title: Decode Message
+      url: '#decode-message'
+    - depth: 2
+      title: Emulate Message To Event
+      url: '#emulate-message-to-event'
+    - depth: 2
+      title: Emulate Message To Trace
+      url: '#emulate-message-to-trace'
+    - depth: 2
+      title: Emulate Message To Wallet
+      url: '#emulate-message-to-wallet'
+    - depth: 2
+      title: Emulate Message To Account Event
+      url: '#emulate-message-to-account-event'
+    - depth: 2
+      title: Get Purchase History
+      url: '#get-purchase-history'
+  structuredData:
+    headings:
+      - content: Get Openapi Json
+        id: get-openapi-json
+      - content: Get Openapi Yml
+        id: get-openapi-yml
+      - content: Status
+        id: status
+      - content: Get Reduced Blockchain Blocks
+        id: get-reduced-blockchain-blocks
+      - content: Get Blockchain Block
+        id: get-blockchain-block
+      - content: Download Blockchain Block Boc
+        id: download-blockchain-block-boc
+      - content: Get Blockchain Masterchain Shards
+        id: get-blockchain-masterchain-shards
+      - content: Get Blockchain Masterchain Blocks
+        id: get-blockchain-masterchain-blocks
+      - content: Get Blockchain Masterchain Transactions
+        id: get-blockchain-masterchain-transactions
+      - content: Get Blockchain Config From Block
+        id: get-blockchain-config-from-block
+      - content: Get Raw Blockchain Config From Block
+        id: get-raw-blockchain-config-from-block
+      - content: Get Blockchain Block Transactions
+        id: get-blockchain-block-transactions
+      - content: Get Blockchain Transaction
+        id: get-blockchain-transaction
+      - content: Get Blockchain Transaction By Message Hash
+        id: get-blockchain-transaction-by-message-hash
+      - content: Get Blockchain Validators
+        id: get-blockchain-validators
+      - content: Get Blockchain Masterchain Head
+        id: get-blockchain-masterchain-head
+      - content: Get Blockchain Raw Account
+        id: get-blockchain-raw-account
+      - content: Get Blockchain Account Transactions
+        id: get-blockchain-account-transactions
+      - content: Exec Get Method For Blockchain Account
+        id: exec-get-method-for-blockchain-account
+      - content: Exec Get Method With Body For Blockchain Account
+        id: exec-get-method-with-body-for-blockchain-account
+      - content: Send Blockchain Message
+        id: send-blockchain-message
+      - content: Get Blockchain Config
+        id: get-blockchain-config
+      - content: Get Raw Blockchain Config
+        id: get-raw-blockchain-config
+      - content: Blockchain Account Inspect
+        id: blockchain-account-inspect
+      - content: Get Library By Hash
+        id: get-library-by-hash
+      - content: Address Parse
+        id: address-parse
+      - content: Get Accounts
+        id: get-accounts
+      - content: Get Account
+        id: get-account
+      - content: Account Dns Back Resolve
+        id: account-dns-back-resolve
+      - content: Get Account Jettons Balances
+        id: get-account-jettons-balances
+      - content: Get Account Jetton Balance
+        id: get-account-jetton-balance
+      - content: Get Account Jettons History
+        id: get-account-jettons-history
+      - content: Get Account Jetton History By I D
+        id: get-account-jetton-history-by-i-d
+      - content: Get Account Nft Items
+        id: get-account-nft-items
+      - content: Get Account Nft History
+        id: get-account-nft-history
+      - content: Get Account Events
+        id: get-account-events
+      - content: Get Account Event
+        id: get-account-event
+      - content: Get Account Traces
+        id: get-account-traces
+      - content: Get Account Subscriptions
+        id: get-account-subscriptions
+      - content: Reindex Account
+        id: reindex-account
+      - content: Search Accounts
+        id: search-accounts
+      - content: Get Account Dns Expiring
+        id: get-account-dns-expiring
+      - content: Get Account Public Key
+        id: get-account-public-key
+      - content: Get Account Multisigs
+        id: get-account-multisigs
+      - content: Get Account Diff
+        id: get-account-diff
+      - content: Get Account Extra Currency History By I D
+        id: get-account-extra-currency-history-by-i-d
+      - content: Get Dns Info
+        id: get-dns-info
+      - content: Dns Resolve
+        id: dns-resolve
+      - content: Get Domain Bids
+        id: get-domain-bids
+      - content: Get All Auctions
+        id: get-all-auctions
+      - content: Get Nft Collections
+        id: get-nft-collections
+      - content: Get Nft Collection
+        id: get-nft-collection
+      - content: Get Nft Collection Items By Addresses
+        id: get-nft-collection-items-by-addresses
+      - content: Get Items From Collection
+        id: get-items-from-collection
+      - content: Get Nft Items By Addresses
+        id: get-nft-items-by-addresses
+      - content: Get Nft Item By Address
+        id: get-nft-item-by-address
+      - content: Get Nft History By I D
+        id: get-nft-history-by-i-d
+      - content: Get Trace
+        id: get-trace
+      - content: Get Event
+        id: get-event
+      - content: Get Jettons
+        id: get-jettons
+      - content: Get Jetton Info
+        id: get-jetton-info
+      - content: Get Jetton Infos By Addresses
+        id: get-jetton-infos-by-addresses
+      - content: Get Jetton Holders
+        id: get-jetton-holders
+      - content: Get Jetton Transfer Payload
+        id: get-jetton-transfer-payload
+      - content: Get Jettons Events
+        id: get-jettons-events
+      - content: Get Jetton Account History By I D
+        id: get-jetton-account-history-by-i-d
+      - content: Get Extra Currency Info
+        id: get-extra-currency-info
+      - content: Get Account Nominators Pools
+        id: get-account-nominators-pools
+      - content: Get Staking Pool Info
+        id: get-staking-pool-info
+      - content: Get Staking Pool History
+        id: get-staking-pool-history
+      - content: Get Staking Pools
+        id: get-staking-pools
+      - content: Get Storage Providers
+        id: get-storage-providers
+      - content: Get Rates
+        id: get-rates
+      - content: Get Chart Rates
+        id: get-chart-rates
+      - content: Get Markets Rates
+        id: get-markets-rates
+      - content: Get Ton Connect Payload
+        id: get-ton-connect-payload
+      - content: Get Account Info By State Init
+        id: get-account-info-by-state-init
+      - content: Ton Connect Proof
+        id: ton-connect-proof
+      - content: Get Account Seqno
+        id: get-account-seqno
+      - content: Get Wallet Info
+        id: get-wallet-info
+      - content: Gasless Config
+        id: gasless-config
+      - content: Gasless Estimate
+        id: gasless-estimate
+      - content: Gasless Send
+        id: gasless-send
+      - content: Get Wallets By Public Key
+        id: get-wallets-by-public-key
+      - content: Get Raw Masterchain Info
+        id: get-raw-masterchain-info
+      - content: Get Raw Masterchain Info Ext
+        id: get-raw-masterchain-info-ext
+      - content: Get Raw Time
+        id: get-raw-time
+      - content: Get Raw Blockchain Block
+        id: get-raw-blockchain-block
+      - content: Get Raw Blockchain Block State
+        id: get-raw-blockchain-block-state
+      - content: Get Raw Blockchain Block Header
+        id: get-raw-blockchain-block-header
+      - content: Send Raw Message
+        id: send-raw-message
+      - content: Get Raw Account State
+        id: get-raw-account-state
+      - content: Get Raw Shard Info
+        id: get-raw-shard-info
+      - content: Get All Raw Shards Info
+        id: get-all-raw-shards-info
+      - content: Get Raw Transactions
+        id: get-raw-transactions
+      - content: Get Raw List Block Transactions
+        id: get-raw-list-block-transactions
+      - content: Get Raw Block Proof
+        id: get-raw-block-proof
+      - content: Get Raw Config
+        id: get-raw-config
+      - content: Get Raw Shard Block Proof
+        id: get-raw-shard-block-proof
+      - content: Get Out Msg Queue Sizes
+        id: get-out-msg-queue-sizes
+      - content: Get Multisig Account
+        id: get-multisig-account
+      - content: Get Multisig Order
+        id: get-multisig-order
+      - content: Decode Message
+        id: decode-message
+      - content: Emulate Message To Event
+        id: emulate-message-to-event
+      - content: Emulate Message To Trace
+        id: emulate-message-to-trace
+      - content: Emulate Message To Wallet
+        id: emulate-message-to-wallet
+      - content: Emulate Message To Account Event
+        id: emulate-message-to-account-event
+      - content: Get Purchase History
+        id: get-purchase-history
+    contents:
+      - content: Get the openapi.json file
+        heading: get-openapi-json
+      - content: Get the openapi.yml file
+        heading: get-openapi-yml
+      - content: Status
+        heading: status
+      - content: Get reduced blockchain blocks data
+        heading: get-reduced-blockchain-blocks
+      - content: Get blockchain block data
+        heading: get-blockchain-block
+      - content: Download blockchain block BOC
+        heading: download-blockchain-block-boc
+      - content: Get blockchain block shards
+        heading: get-blockchain-masterchain-shards
+      - content: >-
+          Get all blocks in all shards and workchains between target and
+          previous masterchain block according to shards last blocks snapshot in
+          masterchain.  We don't recommend to build your app around this method
+          because it has problem with scalability and will work very slow in the
+          future.
+        heading: get-blockchain-masterchain-blocks
+      - content: >-
+          Get all transactions in all shards and workchains between target and
+          previous masterchain block according to shards last blocks snapshot in
+          masterchain. We don't recommend to build your app around this method
+          because it has problem with scalability and will work very slow in the
+          future.
+        heading: get-blockchain-masterchain-transactions
+      - content: Get blockchain config from a specific block, if present.
+        heading: get-blockchain-config-from-block
+      - content: Get raw blockchain config from a specific block, if present.
+        heading: get-raw-blockchain-config-from-block
+      - content: Get transactions from block
+        heading: get-blockchain-block-transactions
+      - content: Get transaction data
+        heading: get-blockchain-transaction
+      - content: Get transaction data by message hash
+        heading: get-blockchain-transaction-by-message-hash
+      - content: Get blockchain validators
+        heading: get-blockchain-validators
+      - content: Get last known masterchain block
+        heading: get-blockchain-masterchain-head
+      - content: >-
+          Get low-level information about an account taken directly from the
+          blockchain.
+        heading: get-blockchain-raw-account
+      - content: Get account transactions
+        heading: get-blockchain-account-transactions
+      - content: Execute get method for account
+        heading: exec-get-method-for-blockchain-account
+      - content: Execute get method for account
+        heading: exec-get-method-with-body-for-blockchain-account
+      - content: Send message to blockchain
+        heading: send-blockchain-message
+      - content: Get blockchain config
+        heading: get-blockchain-config
+      - content: Get raw blockchain config
+        heading: get-raw-blockchain-config
+      - content: Blockchain account inspect
+        heading: blockchain-account-inspect
+      - content: Get library cell
+        heading: get-library-by-hash
+      - content: parse address and display in all formats
+        heading: address-parse
+      - content: >-
+          Get human-friendly information about several accounts without
+          low-level details.
+        heading: get-accounts
+      - content: >-
+          Get human-friendly information about an account without low-level
+          details.
+        heading: get-account
+      - content: Get account's domains
+        heading: account-dns-back-resolve
+      - content: Get all Jettons balances by owner address
+        heading: get-account-jettons-balances
+      - content: Get Jetton balance by owner address
+        heading: get-account-jetton-balance
+      - content: Get the transfer jettons history for account
+        heading: get-account-jettons-history
+      - content: Please use `getJettonAccountHistoryByID`` instead
+        heading: get-account-jetton-history-by-i-d
+      - content: Get all NFT items by owner address
+        heading: get-account-nft-items
+      - content: Get the transfer nft history
+        heading: get-account-nft-history
+      - content: >-
+          Get events for an account. Each event is built on top of a trace which
+          is a series of transactions caused by one inbound message. TonAPI
+          looks for known patterns inside the trace and splits the trace into
+          actions, where a single action represents a meaningful high-level
+          operation like a Jetton Transfer or an NFT Purchase. Actions are
+          expected to be shown to users. It is advised not to build any logic on
+          top of actions because actions can be changed at any time.
+        heading: get-account-events
+      - content: Get event for an account by event_id
+        heading: get-account-event
+      - content: Get traces for account
+        heading: get-account-traces
+      - content: Get all subscriptions by wallet address
+        heading: get-account-subscriptions
+      - content: Update internal cache for a particular account
+        heading: reindex-account
+      - content: Search by account domain name
+        heading: search-accounts
+      - content: Get expiring account .ton dns
+        heading: get-account-dns-expiring
+      - content: Get public key by account id
+        heading: get-account-public-key
+      - content: Get account's multisigs
+        heading: get-account-multisigs
+      - content: Get account's balance change
+        heading: get-account-diff
+      - content: Get the transfer history of extra currencies for an account.
+        heading: get-account-extra-currency-history-by-i-d
+      - content: Get full information about domain name
+        heading: get-dns-info
+      - content: DNS resolve for domain name
+        heading: dns-resolve
+      - content: Get domain bids
+        heading: get-domain-bids
+      - content: Get all auctions
+        heading: get-all-auctions
+      - content: Get NFT collections
+        heading: get-nft-collections
+      - content: Get NFT collection by collection address
+        heading: get-nft-collection
+      - content: Get NFT collection items by their addresses
+        heading: get-nft-collection-items-by-addresses
+      - content: Get NFT items from collection by collection address
+        heading: get-items-from-collection
+      - content: Get NFT items by their addresses
+        heading: get-nft-items-by-addresses
+      - content: Get NFT item by its address
+        heading: get-nft-item-by-address
+      - content: Please use `getAccountNftHistory`` instead
+        heading: get-nft-history-by-i-d
+      - content: Get the trace by trace ID or hash of any transaction in trace
+        heading: get-trace
+      - content: >-
+          Get an event either by event ID or a hash of any transaction in a
+          trace. An event is built on top of a trace which is a series of
+          transactions caused by one inbound message. TonAPI looks for known
+          patterns inside the trace and splits the trace into actions, where a
+          single action represents a meaningful high-level operation like a
+          Jetton Transfer or an NFT Purchase. Actions are expected to be shown
+          to users. It is advised not to build any logic on top of actions
+          because actions can be changed at any time.
+        heading: get-event
+      - content: Get a list of all indexed jetton masters in the blockchain.
+        heading: get-jettons
+      - content: Get jetton metadata by jetton master address
+        heading: get-jetton-info
+      - content: Get jetton metadata items by jetton master addresses
+        heading: get-jetton-infos-by-addresses
+      - content: Get jetton's holders
+        heading: get-jetton-holders
+      - content: Get jetton's custom payload and state init required for transfer
+        heading: get-jetton-transfer-payload
+      - content: Get only jetton transfers in the event
+        heading: get-jettons-events
+      - content: Get the transfer jetton history for account and jetton
+        heading: get-jetton-account-history-by-i-d
+      - content: Get extra currency info by id
+        heading: get-extra-currency-info
+      - content: All pools where account participates
+        heading: get-account-nominators-pools
+      - content: Stacking pool info
+        heading: get-staking-pool-info
+      - content: Pool history
+        heading: get-staking-pool-history
+      - content: All pools available in network
+        heading: get-staking-pools
+      - content: Get TON storage providers deployed to the blockchain.
+        heading: get-storage-providers
+      - content: >-
+          Get the token price in the chosen currency for display only. Don’t use
+          this for financial transactions.
+        heading: get-rates
+      - content: Get chart by token
+        heading: get-chart-rates
+      - content: Get the TON price from markets
+        heading: get-markets-rates
+      - content: Get a payload for further token receipt
+        heading: get-ton-connect-payload
+      - content: Get account info by state init
+        heading: get-account-info-by-state-init
+      - content: Account verification and token issuance
+        heading: ton-connect-proof
+      - content: Get account seqno
+        heading: get-account-seqno
+      - content: >-
+          Get human-friendly information about a wallet without low-level
+          details.
+        heading: get-wallet-info
+      - content: Returns configuration of gasless transfers
+        heading: gasless-config
+      - content: Estimates the cost of the given messages and returns a payload to sign
+        heading: gasless-estimate
+      - content: Submits the signed gasless transaction message to the network
+        heading: gasless-send
+      - content: Get wallets by public key
+        heading: get-wallets-by-public-key
+      - content: Get raw masterchain info
+        heading: get-raw-masterchain-info
+      - content: Get raw masterchain info ext
+        heading: get-raw-masterchain-info-ext
+      - content: Get raw time
+        heading: get-raw-time
+      - content: Get raw blockchain block
+        heading: get-raw-blockchain-block
+      - content: Get raw blockchain block state
+        heading: get-raw-blockchain-block-state
+      - content: Get raw blockchain block header
+        heading: get-raw-blockchain-block-header
+      - content: Send raw message to blockchain
+        heading: send-raw-message
+      - content: Get raw account state
+        heading: get-raw-account-state
+      - content: Get raw shard info
+        heading: get-raw-shard-info
+      - content: Get all raw shards info
+        heading: get-all-raw-shards-info
+      - content: Get raw transactions
+        heading: get-raw-transactions
+      - content: Get raw list block transactions
+        heading: get-raw-list-block-transactions
+      - content: Get raw block proof
+        heading: get-raw-block-proof
+      - content: Get raw config
+        heading: get-raw-config
+      - content: Get raw shard block proof
+        heading: get-raw-shard-block-proof
+      - content: Get out msg queue sizes
+        heading: get-out-msg-queue-sizes
+      - content: Get multisig account info
+        heading: get-multisig-account
+      - content: Get multisig order
+        heading: get-multisig-order
+      - content: >-
+          Decode a given message. Only external incoming messages can be decoded
+          currently.
+        heading: decode-message
+      - content: Emulate sending message to retrieve general blockchain events
+        heading: emulate-message-to-event
+      - content: Emulate sending message to retrieve with a detailed execution trace
+        heading: emulate-message-to-trace
+      - content: Emulate sending message to retrieve the resulting wallet state
+        heading: emulate-message-to-wallet
+      - content: Emulate sending message to retrieve account-specific events
+        heading: emulate-message-to-account-event
+      - content: Get history of purchases
+        heading: get-purchase-history
 ---
 
-This API is designed to provide users with a simple and streamlined experience, eliminating the complexity of the TON blockchain. For instance, you don't need to worry about supporting all wallet standards, performing verifications, or decoding raw bits and bytes.
+{/* This file was generated by Fumadocs. Do not edit this file directly. Any changes should be made by running the generation command again. */}
+
+This API is designed to provide users with a simple and streamlined experience, eliminating the complexity of the TON blockchain.
 
 ## Authorization
 
 All methods are available without authentication, but with a rate limit of 1 request per 4 seconds (0.24 rps).
 
-To authorize your request, you will need a token, which you can obtain from [TonConsole](https://tonconsole.com/). To pass the token in your request, add the Authorization HTTP header with the "Bearer scheme":
-
-```bash
-curl \
- -H 'Authorization: Bearer YOUR_TOKEN_HERE' \
- 'https://tonapi.io/v2/blockchain/masterchain-head'
-```
-
-## Rate Limits
-
-The rate limits for all of your issued tokens are the same and match the plan you have. Learn more about tiers and limits on [TonConsole](https://tonconsole.com/tonapi/pricing).
-
-## Base URLs
-
-- **Mainnet**: `https://tonapi.io`
-- **Testnet**: `https://testnet.tonapi.io`
+To authorize your request, you will need a token from [TonConsole](https://tonconsole.com/).
 
 ---
 
-## Interactive API Reference
 
-Below you'll find the complete interactive OpenAPI documentation. You can:
-- 🔍 Explore all endpoints organized by category
-- 📝 View detailed request/response schemas
-- 🎮 **Try API calls directly from your browser**
-- 💻 See code examples in multiple programming languages
-- 🔐 Test with your Bearer token authentication
-
-<FullAPIPage />
+<APIPage document={"./tonapi-openapi.yml"} operations={[{"path":"/v2/openapi.json","method":"get"},{"path":"/v2/openapi.yml","method":"get"},{"path":"/v2/status","method":"get"},{"path":"/v2/blockchain/reduced/blocks","method":"get"},{"path":"/v2/blockchain/blocks/{block_id}","method":"get"},{"path":"/v2/blockchain/blocks/{block_id}/boc","method":"get"},{"path":"/v2/blockchain/masterchain/{masterchain_seqno}/shards","method":"get"},{"path":"/v2/blockchain/masterchain/{masterchain_seqno}/blocks","method":"get"},{"path":"/v2/blockchain/masterchain/{masterchain_seqno}/transactions","method":"get"},{"path":"/v2/blockchain/masterchain/{masterchain_seqno}/config","method":"get"},{"path":"/v2/blockchain/masterchain/{masterchain_seqno}/config/raw","method":"get"},{"path":"/v2/blockchain/blocks/{block_id}/transactions","method":"get"},{"path":"/v2/blockchain/transactions/{transaction_id}","method":"get"},{"path":"/v2/blockchain/messages/{msg_id}/transaction","method":"get"},{"path":"/v2/blockchain/validators","method":"get"},{"path":"/v2/blockchain/masterchain-head","method":"get"},{"path":"/v2/blockchain/accounts/{account_id}","method":"get"},{"path":"/v2/blockchain/accounts/{account_id}/transactions","method":"get"},{"path":"/v2/blockchain/accounts/{account_id}/methods/{method_name}","method":"get"},{"path":"/v2/blockchain/accounts/{account_id}/methods/{method_name}","method":"post"},{"path":"/v2/blockchain/message","method":"post"},{"path":"/v2/blockchain/config","method":"get"},{"path":"/v2/blockchain/config/raw","method":"get"},{"path":"/v2/blockchain/accounts/{account_id}/inspect","method":"get"},{"path":"/v2/blockchain/libraries/{hash}","method":"get"},{"path":"/v2/address/{account_id}/parse","method":"get"},{"path":"/v2/accounts/_bulk","method":"post"},{"path":"/v2/accounts/{account_id}","method":"get"},{"path":"/v2/accounts/{account_id}/dns/backresolve","method":"get"},{"path":"/v2/accounts/{account_id}/jettons","method":"get"},{"path":"/v2/accounts/{account_id}/jettons/{jetton_id}","method":"get"},{"path":"/v2/accounts/{account_id}/jettons/history","method":"get"},{"path":"/v2/accounts/{account_id}/jettons/{jetton_id}/history","method":"get"},{"path":"/v2/accounts/{account_id}/nfts","method":"get"},{"path":"/v2/accounts/{account_id}/nfts/history","method":"get"},{"path":"/v2/accounts/{account_id}/events","method":"get"},{"path":"/v2/accounts/{account_id}/events/{event_id}","method":"get"},{"path":"/v2/accounts/{account_id}/traces","method":"get"},{"path":"/v2/accounts/{account_id}/subscriptions","method":"get"},{"path":"/v2/accounts/{account_id}/reindex","method":"post"},{"path":"/v2/accounts/search","method":"get"},{"path":"/v2/accounts/{account_id}/dns/expiring","method":"get"},{"path":"/v2/accounts/{account_id}/publickey","method":"get"},{"path":"/v2/accounts/{account_id}/multisigs","method":"get"},{"path":"/v2/accounts/{account_id}/diff","method":"get"},{"path":"/v2/accounts/{account_id}/extra-currency/{id}/history","method":"get"},{"path":"/v2/dns/{domain_name}","method":"get"},{"path":"/v2/dns/{domain_name}/resolve","method":"get"},{"path":"/v2/dns/{domain_name}/bids","method":"get"},{"path":"/v2/dns/auctions","method":"get"},{"path":"/v2/nfts/collections","method":"get"},{"path":"/v2/nfts/collections/{account_id}","method":"get"},{"path":"/v2/nfts/collections/_bulk","method":"post"},{"path":"/v2/nfts/collections/{account_id}/items","method":"get"},{"path":"/v2/nfts/_bulk","method":"post"},{"path":"/v2/nfts/{account_id}","method":"get"},{"path":"/v2/nfts/{account_id}/history","method":"get"},{"path":"/v2/traces/{trace_id}","method":"get"},{"path":"/v2/events/{event_id}","method":"get"},{"path":"/v2/jettons","method":"get"},{"path":"/v2/jettons/{account_id}","method":"get"},{"path":"/v2/jettons/_bulk","method":"post"},{"path":"/v2/jettons/{account_id}/holders","method":"get"},{"path":"/v2/jettons/{jetton_id}/transfer/{account_id}/payload","method":"get"},{"path":"/v2/events/{event_id}/jettons","method":"get"},{"path":"/v2/jettons/{jetton_id}/accounts/{account_id}/history","method":"get"},{"path":"/v2/extra-currency/{id}","method":"get"},{"path":"/v2/staking/nominator/{account_id}/pools","method":"get"},{"path":"/v2/staking/pool/{account_id}","method":"get"},{"path":"/v2/staking/pool/{account_id}/history","method":"get"},{"path":"/v2/staking/pools","method":"get"},{"path":"/v2/storage/providers","method":"get"},{"path":"/v2/rates","method":"get"},{"path":"/v2/rates/chart","method":"get"},{"path":"/v2/rates/markets","method":"get"},{"path":"/v2/tonconnect/payload","method":"get"},{"path":"/v2/tonconnect/stateinit","method":"post"},{"path":"/v2/wallet/auth/proof","method":"post"},{"path":"/v2/wallet/{account_id}/seqno","method":"get"},{"path":"/v2/wallet/{account_id}","method":"get"},{"path":"/v2/gasless/config","method":"get"},{"path":"/v2/gasless/estimate/{master_id}","method":"post"},{"path":"/v2/gasless/send","method":"post"},{"path":"/v2/pubkeys/{public_key}/wallets","method":"get"},{"path":"/v2/liteserver/get_masterchain_info","method":"get"},{"path":"/v2/liteserver/get_masterchain_info_ext","method":"get"},{"path":"/v2/liteserver/get_time","method":"get"},{"path":"/v2/liteserver/get_block/{block_id}","method":"get"},{"path":"/v2/liteserver/get_state/{block_id}","method":"get"},{"path":"/v2/liteserver/get_block_header/{block_id}","method":"get"},{"path":"/v2/liteserver/send_message","method":"post"},{"path":"/v2/liteserver/get_account_state/{account_id}","method":"get"},{"path":"/v2/liteserver/get_shard_info/{block_id}","method":"get"},{"path":"/v2/liteserver/get_all_shards_info/{block_id}","method":"get"},{"path":"/v2/liteserver/get_transactions/{account_id}","method":"get"},{"path":"/v2/liteserver/list_block_transactions/{block_id}","method":"get"},{"path":"/v2/liteserver/get_block_proof","method":"get"},{"path":"/v2/liteserver/get_config_all/{block_id}","method":"get"},{"path":"/v2/liteserver/get_shard_block_proof/{block_id}","method":"get"},{"path":"/v2/liteserver/get_out_msg_queue_sizes","method":"get"},{"path":"/v2/multisig/{account_id}","method":"get"},{"path":"/v2/multisig/order/{account_id}","method":"get"},{"path":"/v2/message/decode","method":"post"},{"path":"/v2/events/emulate","method":"post"},{"path":"/v2/traces/emulate","method":"post"},{"path":"/v2/wallet/emulate","method":"post"},{"path":"/v2/accounts/{account_id}/events/emulate","method":"post"},{"path":"/v2/purchases/{account_id}/history","method":"get"}]} webhooks={[]} hasHead={true} />
