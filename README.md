@@ -84,13 +84,12 @@ jobs:
 │   └── api/search/          # Search API (static)
 ├── docs/                    # Documentation MDX files
 │   ├── tonapi/
-│   │   └── rest-api.mdx    # Uses <FullAPIPage> component
+│   │   └── rest-api.mdx    # Auto-generated (via pnpm generate:openapi)
 │   ├── payment-processing/
 │   └── introduction/
 ├── blog/                    # Academy articles MDX
 ├── components/
 │   ├── mermaid.tsx         # Mermaid diagram support
-│   ├── full-api-page.tsx   # Custom OpenAPI component (renders all endpoints)
 │   └── mdx-components.tsx  # Custom MDX components
 ├── lib/
 │   └── openapi.ts          # OpenAPI config
@@ -129,8 +128,7 @@ jobs:
    - `<Accordions>` / `<Accordion>`
    - `<Tabs>` / `<Tab>`
    - `<Mermaid>`
-   - `<FullAPIPage>` (for complete OpenAPI docs)
-   - `<APIPage>` (for individual OpenAPI endpoints)
+   - `<APIPage>` (for OpenAPI endpoints - auto-generated)
 
 Example:
 ```mdx
@@ -150,25 +148,24 @@ Hidden content here
 
 ### Updating API Docs
 
-The REST API page uses a custom `<FullAPIPage>` component that automatically renders all 108 endpoints:
+The REST API page is auto-generated using fumadocs-openapi's `per: 'file'` mode:
 
-```mdx
-<!-- docs/tonapi/rest-api.mdx -->
-<FullAPIPage />
+```bash
+pnpm generate:openapi
 ```
 
-The `FullAPIPage` component (in `components/full-api-page.tsx`):
-- Reads the OpenAPI spec from `tonapi-openapi.yml`
-- Extracts all operations (paths + methods)
-- Passes them to fumadocs-openapi's `APIPage` component
-- Renders complete interactive documentation for all endpoints
+This command:
+1. Downloads latest OpenAPI spec from https://tonapi.io/v2/openapi.yml
+2. Generates single `docs/tonapi/rest-api.mdx` with all 108 endpoints
+3. Injects intro content (auth, rate limits, base URLs) via `beforeWrite` hook
 
-To update:
-1. `pnpm generate:openapi` - Download latest spec
-2. Restart dev server or rebuild
-3. All endpoints/schemas update automatically
+The generated page includes:
+- Interactive `<APIPage>` component with full playground
+- All 108 endpoints organized with TOC
+- Request/response schemas, code examples
+- Try-it-now functionality with Bearer token support
 
-**Note:** First load takes ~70s (19.5s compile + 52s render) due to processing 108 endpoints. Subsequent loads are cached and much faster.
+**Performance:** Build time ~23.7s for REST API page with all endpoints.
 
 ### Theme System
 
