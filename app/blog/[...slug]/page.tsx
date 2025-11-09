@@ -2,11 +2,14 @@ import { blogSource } from '@/source';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { getMDXComponents } from '@/mdx-components';
 
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
   const params = await props.params;
   const page = blogSource.getPage(params.slug);
   if (!page) notFound();
+
+  const MDX = page.data.body;
 
   return (
     <main className="container py-12">
@@ -23,11 +26,7 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
             <p className="text-xl text-muted-foreground">{page.data.description}</p>
           )}
           <div className="border-b pb-4 mb-8"></div>
-          <div>
-            <p className="text-muted-foreground">
-              Blog content will be rendered here. MDX rendering is being configured.
-            </p>
-          </div>
+          <MDX components={getMDXComponents()} />
         </article>
       </div>
     </main>

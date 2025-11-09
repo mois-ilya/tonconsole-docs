@@ -9,7 +9,9 @@ Alright — let's break down how the hell you're supposed to track a transaction
 
 If you don't clearly get what an **account**, **transaction**, **message**, **trace**, **cell**, or **cell-hash** is — or what the wallet actually signs — buckle up and read the glossary.
 
+<Accordions>
 <Accordion title="Glossary (quick refresher)">
+
 **Account** – Basic unit of information storage in the blockchain; a record in the workchain state containing metadata, balance, and possibly code and data.
 
 **Messages** – Data packets exchanged between accounts (internal) or between accounts and entities outside the blockchain (external-in or external-out).
@@ -26,6 +28,8 @@ Want examples? Go check [tonviewer.com](https://tonviewer.com) – some are [sim
 **Cell** – The atomic unit in TON. Up to 1023 bits and up to 4 refs to other cells. Everything lives in cells – accounts, messages, transactions, even blocks. And each cell has its own hash. That hash is how you track stuff.
 
 **Hash** – Anytime you see *"hash"* here, it means the hash of the cell. Don't try to hash the raw bytes like a savage. It won't work.
+</Accordion>
+</Accordions>
 
 ### Simple Example
 
@@ -42,7 +46,6 @@ This whole thing – the instruction and signature – goes into the **body** of
 In decoded form, it looks something like this:
 ![Example decoded external message](/assets/transaction-tracking-external-in.png)
 Once it lands, two transactions and two messages are recorded on-chain. The external-in message from the wallet triggers the sender's transaction, which emits an internal message. That internal message reaches the recipient and triggers their transaction.
-</Accordion>
 
 ---
 
