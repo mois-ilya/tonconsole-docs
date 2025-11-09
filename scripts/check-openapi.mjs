@@ -1,4 +1,4 @@
-import { existsSync, writeFileSync } from 'fs';
+import { existsSync, writeFileSync, copyFileSync, mkdirSync } from 'fs';
 
 // Check if OpenAPI spec exists
 if (!existsSync('./tonapi-openapi.yml')) {
@@ -19,4 +19,13 @@ if (!existsSync('./tonapi-openapi.yml')) {
   }
 } else {
   console.log('✅ OpenAPI spec found');
+}
+
+// Copy to public directory for client-side access
+try {
+  mkdirSync('./public', { recursive: true });
+  copyFileSync('./tonapi-openapi.yml', './public/tonapi-openapi.yml');
+  console.log('📁 OpenAPI spec copied to public/');
+} catch (error) {
+  console.warn('⚠️  Failed to copy spec to public/:', error.message);
 }
