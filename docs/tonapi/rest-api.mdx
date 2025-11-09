@@ -1,0 +1,41 @@
+---
+title: REST API
+description: Complete interactive API reference for TonAPI REST endpoints
+full: true
+---
+
+This API is designed to provide users with a simple and streamlined experience, eliminating the complexity of the TON blockchain. For instance, you don't need to worry about supporting all wallet standards, performing verifications, or decoding raw bits and bytes.
+
+## Authorization
+
+All methods are available without authentication, but with a rate limit of 1 request per 4 seconds (0.24 rps).
+
+To authorize your request, you will need a token, which you can obtain from [TonConsole](https://tonconsole.com/). To pass the token in your request, add the Authorization HTTP header with the "Bearer scheme":
+
+```bash
+curl \
+ -H 'Authorization: Bearer YOUR_TOKEN_HERE' \
+ 'https://tonapi.io/v2/blockchain/masterchain-head'
+```
+
+## Rate Limits
+
+The rate limits for all of your issued tokens are the same and match the plan you have. Learn more about tiers and limits on [TonConsole](https://tonconsole.com/tonapi/pricing).
+
+## Base URLs
+
+- **Mainnet**: `https://tonapi.io`
+- **Testnet**: `https://testnet.tonapi.io`
+
+---
+
+## Interactive API Reference
+
+Below you'll find the complete interactive OpenAPI documentation. You can:
+- 🔍 Explore all endpoints organized by category
+- 📝 View detailed request/response schemas
+- 🎮 **Try API calls directly from your browser**
+- 💻 See code examples in multiple programming languages
+- 🔐 Test with your Bearer token authentication
+
+<APIPage document="./tonapi-openapi.yml" hasHead={false} />

@@ -2,7 +2,7 @@
   "title": "TonAPI",
   "pages": [
     "index",
-    "api-reference",
+    "rest-api",
     "webhooks-api",
     "streaming-api",
     "graphql",
