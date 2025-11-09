@@ -1,0 +1,25 @@
+{
+  "title": "API Reference",
+  "pages": [
+    "index",
+    "accounts",
+    "blockchain",
+    "nft",
+    "jettons",
+    "dns",
+    "wallet",
+    "staking",
+    "events",
+    "traces",
+    "rates",
+    "connect",
+    "gasless",
+    "storage",
+    "multisig",
+    "emulation",
+    "lite-server",
+    "utilities",
+    "purchases",
+    "extracurrency"
+  ]
+}

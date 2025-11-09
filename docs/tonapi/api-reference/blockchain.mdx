@@ -1,0 +1,179 @@
+---
+title: Blockchain
+full: true
+_openapi:
+  toc:
+    - depth: 2
+      title: Get Reduced Blockchain Blocks
+      url: '#get-reduced-blockchain-blocks'
+    - depth: 2
+      title: Get Blockchain Block
+      url: '#get-blockchain-block'
+    - depth: 2
+      title: Download Blockchain Block Boc
+      url: '#download-blockchain-block-boc'
+    - depth: 2
+      title: Get Blockchain Masterchain Shards
+      url: '#get-blockchain-masterchain-shards'
+    - depth: 2
+      title: Get Blockchain Masterchain Blocks
+      url: '#get-blockchain-masterchain-blocks'
+    - depth: 2
+      title: Get Blockchain Masterchain Transactions
+      url: '#get-blockchain-masterchain-transactions'
+    - depth: 2
+      title: Get Blockchain Config From Block
+      url: '#get-blockchain-config-from-block'
+    - depth: 2
+      title: Get Raw Blockchain Config From Block
+      url: '#get-raw-blockchain-config-from-block'
+    - depth: 2
+      title: Get Blockchain Block Transactions
+      url: '#get-blockchain-block-transactions'
+    - depth: 2
+      title: Get Blockchain Transaction
+      url: '#get-blockchain-transaction'
+    - depth: 2
+      title: Get Blockchain Transaction By Message Hash
+      url: '#get-blockchain-transaction-by-message-hash'
+    - depth: 2
+      title: Get Blockchain Validators
+      url: '#get-blockchain-validators'
+    - depth: 2
+      title: Get Blockchain Masterchain Head
+      url: '#get-blockchain-masterchain-head'
+    - depth: 2
+      title: Get Blockchain Raw Account
+      url: '#get-blockchain-raw-account'
+    - depth: 2
+      title: Get Blockchain Account Transactions
+      url: '#get-blockchain-account-transactions'
+    - depth: 2
+      title: Exec Get Method For Blockchain Account
+      url: '#exec-get-method-for-blockchain-account'
+    - depth: 2
+      title: Exec Get Method With Body For Blockchain Account
+      url: '#exec-get-method-with-body-for-blockchain-account'
+    - depth: 2
+      title: Send Blockchain Message
+      url: '#send-blockchain-message'
+    - depth: 2
+      title: Get Blockchain Config
+      url: '#get-blockchain-config'
+    - depth: 2
+      title: Get Raw Blockchain Config
+      url: '#get-raw-blockchain-config'
+    - depth: 2
+      title: Blockchain Account Inspect
+      url: '#blockchain-account-inspect'
+    - depth: 2
+      title: Get Library By Hash
+      url: '#get-library-by-hash'
+  structuredData:
+    headings:
+      - content: Get Reduced Blockchain Blocks
+        id: get-reduced-blockchain-blocks
+      - content: Get Blockchain Block
+        id: get-blockchain-block
+      - content: Download Blockchain Block Boc
+        id: download-blockchain-block-boc
+      - content: Get Blockchain Masterchain Shards
+        id: get-blockchain-masterchain-shards
+      - content: Get Blockchain Masterchain Blocks
+        id: get-blockchain-masterchain-blocks
+      - content: Get Blockchain Masterchain Transactions
+        id: get-blockchain-masterchain-transactions
+      - content: Get Blockchain Config From Block
+        id: get-blockchain-config-from-block
+      - content: Get Raw Blockchain Config From Block
+        id: get-raw-blockchain-config-from-block
+      - content: Get Blockchain Block Transactions
+        id: get-blockchain-block-transactions
+      - content: Get Blockchain Transaction
+        id: get-blockchain-transaction
+      - content: Get Blockchain Transaction By Message Hash
+        id: get-blockchain-transaction-by-message-hash
+      - content: Get Blockchain Validators
+        id: get-blockchain-validators
+      - content: Get Blockchain Masterchain Head
+        id: get-blockchain-masterchain-head
+      - content: Get Blockchain Raw Account
+        id: get-blockchain-raw-account
+      - content: Get Blockchain Account Transactions
+        id: get-blockchain-account-transactions
+      - content: Exec Get Method For Blockchain Account
+        id: exec-get-method-for-blockchain-account
+      - content: Exec Get Method With Body For Blockchain Account
+        id: exec-get-method-with-body-for-blockchain-account
+      - content: Send Blockchain Message
+        id: send-blockchain-message
+      - content: Get Blockchain Config
+        id: get-blockchain-config
+      - content: Get Raw Blockchain Config
+        id: get-raw-blockchain-config
+      - content: Blockchain Account Inspect
+        id: blockchain-account-inspect
+      - content: Get Library By Hash
+        id: get-library-by-hash
+    contents:
+      - content: Get reduced blockchain blocks data
+        heading: get-reduced-blockchain-blocks
+      - content: Get blockchain block data
+        heading: get-blockchain-block
+      - content: Download blockchain block BOC
+        heading: download-blockchain-block-boc
+      - content: Get blockchain block shards
+        heading: get-blockchain-masterchain-shards
+      - content: >-
+          Get all blocks in all shards and workchains between target and
+          previous masterchain block according to shards last blocks snapshot in
+          masterchain.  We don't recommend to build your app around this method
+          because it has problem with scalability and will work very slow in the
+          future.
+        heading: get-blockchain-masterchain-blocks
+      - content: >-
+          Get all transactions in all shards and workchains between target and
+          previous masterchain block according to shards last blocks snapshot in
+          masterchain. We don't recommend to build your app around this method
+          because it has problem with scalability and will work very slow in the
+          future.
+        heading: get-blockchain-masterchain-transactions
+      - content: Get blockchain config from a specific block, if present.
+        heading: get-blockchain-config-from-block
+      - content: Get raw blockchain config from a specific block, if present.
+        heading: get-raw-blockchain-config-from-block
+      - content: Get transactions from block
+        heading: get-blockchain-block-transactions
+      - content: Get transaction data
+        heading: get-blockchain-transaction
+      - content: Get transaction data by message hash
+        heading: get-blockchain-transaction-by-message-hash
+      - content: Get blockchain validators
+        heading: get-blockchain-validators
+      - content: Get last known masterchain block
+        heading: get-blockchain-masterchain-head
+      - content: >-
+          Get low-level information about an account taken directly from the
+          blockchain.
+        heading: get-blockchain-raw-account
+      - content: Get account transactions
+        heading: get-blockchain-account-transactions
+      - content: Execute get method for account
+        heading: exec-get-method-for-blockchain-account
+      - content: Execute get method for account
+        heading: exec-get-method-with-body-for-blockchain-account
+      - content: Send message to blockchain
+        heading: send-blockchain-message
+      - content: Get blockchain config
+        heading: get-blockchain-config
+      - content: Get raw blockchain config
+        heading: get-raw-blockchain-config
+      - content: Blockchain account inspect
+        heading: blockchain-account-inspect
+      - content: Get library cell
+        heading: get-library-by-hash
+---
+
+{/* This file was generated by Fumadocs. Do not edit this file directly. Any changes should be made by running the generation command again. */}
+
+<APIPage document={"./tonapi-openapi.yml"} operations={[{"path":"/v2/blockchain/reduced/blocks","method":"get"},{"path":"/v2/blockchain/blocks/{block_id}","method":"get"},{"path":"/v2/blockchain/blocks/{block_id}/boc","method":"get"},{"path":"/v2/blockchain/masterchain/{masterchain_seqno}/shards","method":"get"},{"path":"/v2/blockchain/masterchain/{masterchain_seqno}/blocks","method":"get"},{"path":"/v2/blockchain/masterchain/{masterchain_seqno}/transactions","method":"get"},{"path":"/v2/blockchain/masterchain/{masterchain_seqno}/config","method":"get"},{"path":"/v2/blockchain/masterchain/{masterchain_seqno}/config/raw","method":"get"},{"path":"/v2/blockchain/blocks/{block_id}/transactions","method":"get"},{"path":"/v2/blockchain/transactions/{transaction_id}","method":"get"},{"path":"/v2/blockchain/messages/{msg_id}/transaction","method":"get"},{"path":"/v2/blockchain/validators","method":"get"},{"path":"/v2/blockchain/masterchain-head","method":"get"},{"path":"/v2/blockchain/accounts/{account_id}","method":"get"},{"path":"/v2/blockchain/accounts/{account_id}/transactions","method":"get"},{"path":"/v2/blockchain/accounts/{account_id}/methods/{method_name}","method":"get"},{"path":"/v2/blockchain/accounts/{account_id}/methods/{method_name}","method":"post"},{"path":"/v2/blockchain/message","method":"post"},{"path":"/v2/blockchain/config","method":"get"},{"path":"/v2/blockchain/config/raw","method":"get"},{"path":"/v2/blockchain/accounts/{account_id}/inspect","method":"get"},{"path":"/v2/blockchain/libraries/{hash}","method":"get"}]} webhooks={[]} hasHead={true} />

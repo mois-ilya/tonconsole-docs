@@ -1,6 +1,7 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { Mermaid } from '@/components/mermaid';
 import { Accordion, Accordions, Tabs, Tab } from '@/components/mdx-components';
+import { APIPage } from 'fumadocs-openapi/ui';
 import type { MDXComponents } from 'mdx/types';
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -11,6 +12,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Accordions,
     Tabs,
     Tab,
+    APIPage,
     ...components,
   };
 }

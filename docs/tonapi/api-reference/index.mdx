@@ -1,0 +1,59 @@
+---
+title: API Reference
+description: Complete interactive API reference for TonAPI REST endpoints
+---
+
+This section provides complete interactive documentation for all TonAPI REST API endpoints. You can explore endpoints, view request/response schemas, and try out API calls directly from this page.
+
+## Getting Started
+
+All methods are available without authentication, but with a rate limit of 1 request per 4 seconds (0.24 rps).
+
+To authorize your request, you will need a token, which you can obtain from [TonConsole](https://tonconsole.com/). To pass the token in your request, add the Authorization HTTP header with the "Bearer scheme":
+
+```bash
+curl \
+ -H 'Authorization: Bearer YOUR_TOKEN_HERE' \
+ 'https://tonapi.io/v2/blockchain/masterchain-head'
+```
+
+## Base URLs
+
+TonAPI provides two base endpoints depending on the target network:
+
+- **Mainnet**: `https://tonapi.io`
+- **Testnet**: `https://testnet.tonapi.io`
+
+## Rate Limits
+
+The rate limits for all of your issued tokens are the same and match the plan you have. The rate limits are the same for both the testnet and mainnet (if you're paying for a 10 rps plan, you'll get 10 rps in the testnet and 10 rps in the mainnet).
+
+Learn more about tiers and limits on [TonConsole](https://tonconsole.com/tonapi/pricing).
+
+## API Categories
+
+Browse the API endpoints by category:
+
+- **[Accounts](/docs/tonapi/api-reference/accounts)** - Account information, balances, jettons, NFTs, and events
+- **[Blockchain](/docs/tonapi/api-reference/blockchain)** - Blockchain data, blocks, transactions, and masterchain
+- **[NFT](/docs/tonapi/api-reference/nft)** - NFT collections and items
+- **[Jettons](/docs/tonapi/api-reference/jettons)** - Jetton information and transfers
+- **[DNS](/docs/tonapi/api-reference/dns)** - TON DNS operations
+- **[Wallet](/docs/tonapi/api-reference/wallet)** - Wallet operations and messages
+- **[Staking](/docs/tonapi/api-reference/staking)** - Staking pools and operations
+- **[Events](/docs/tonapi/api-reference/events)** - Event tracking and history
+- **[Traces](/docs/tonapi/api-reference/traces)** - Transaction traces
+- **[Rates](/docs/tonapi/api-reference/rates)** - Exchange rates and markets
+- **[Connect](/docs/tonapi/api-reference/connect)** - TonConnect integration
+- **[Gasless](/docs/tonapi/api-reference/gasless)** - Gasless transactions
+- **[Storage](/docs/tonapi/api-reference/storage)** - TON Storage operations
+- **[Multisig](/docs/tonapi/api-reference/multisig)** - Multisignature operations
+- **[Emulation](/docs/tonapi/api-reference/emulation)** - Transaction emulation
+- **[Lite Server](/docs/tonapi/api-reference/lite-server)** - Lite server methods
+- **[Utilities](/docs/tonapi/api-reference/utilities)** - Utility endpoints
+- **[Purchases](/docs/tonapi/api-reference/purchases)** - Purchase operations
+- **[ExtraCurrency](/docs/tonapi/api-reference/extracurrency)** - Extra currency operations
+
+## SDKs
+
+To simplify integration, SDKs are provided in multiple programming languages. You can find them in the [SDK Documentation](/docs/tonapi/sdk) section.

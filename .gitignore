@@ -41,3 +41,6 @@ next-env.d.ts
 
 # fumadocs
 .source
+
+# OpenAPI spec (downloaded during build)
+tonapi-openapi.yml

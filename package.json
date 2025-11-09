@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "generate:openapi": "node scripts/generate-openapi.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

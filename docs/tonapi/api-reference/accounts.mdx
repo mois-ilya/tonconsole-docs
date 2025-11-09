@@ -1,0 +1,171 @@
+---
+title: Accounts
+full: true
+_openapi:
+  toc:
+    - depth: 2
+      title: Get Accounts
+      url: '#get-accounts'
+    - depth: 2
+      title: Get Account
+      url: '#get-account'
+    - depth: 2
+      title: Account Dns Back Resolve
+      url: '#account-dns-back-resolve'
+    - depth: 2
+      title: Get Account Jettons Balances
+      url: '#get-account-jettons-balances'
+    - depth: 2
+      title: Get Account Jetton Balance
+      url: '#get-account-jetton-balance'
+    - depth: 2
+      title: Get Account Jettons History
+      url: '#get-account-jettons-history'
+    - depth: 2
+      title: Get Account Jetton History By I D
+      url: '#get-account-jetton-history-by-i-d'
+    - depth: 2
+      title: Get Account Nft Items
+      url: '#get-account-nft-items'
+    - depth: 2
+      title: Get Account Events
+      url: '#get-account-events'
+    - depth: 2
+      title: Get Account Event
+      url: '#get-account-event'
+    - depth: 2
+      title: Get Account Traces
+      url: '#get-account-traces'
+    - depth: 2
+      title: Get Account Subscriptions
+      url: '#get-account-subscriptions'
+    - depth: 2
+      title: Reindex Account
+      url: '#reindex-account'
+    - depth: 2
+      title: Search Accounts
+      url: '#search-accounts'
+    - depth: 2
+      title: Get Account Dns Expiring
+      url: '#get-account-dns-expiring'
+    - depth: 2
+      title: Get Account Public Key
+      url: '#get-account-public-key'
+    - depth: 2
+      title: Get Account Multisigs
+      url: '#get-account-multisigs'
+    - depth: 2
+      title: Get Account Diff
+      url: '#get-account-diff'
+    - depth: 2
+      title: Get Account Extra Currency History By I D
+      url: '#get-account-extra-currency-history-by-i-d'
+    - depth: 2
+      title: Get Jetton Account History By I D
+      url: '#get-jetton-account-history-by-i-d'
+    - depth: 2
+      title: Emulate Message To Account Event
+      url: '#emulate-message-to-account-event'
+  structuredData:
+    headings:
+      - content: Get Accounts
+        id: get-accounts
+      - content: Get Account
+        id: get-account
+      - content: Account Dns Back Resolve
+        id: account-dns-back-resolve
+      - content: Get Account Jettons Balances
+        id: get-account-jettons-balances
+      - content: Get Account Jetton Balance
+        id: get-account-jetton-balance
+      - content: Get Account Jettons History
+        id: get-account-jettons-history
+      - content: Get Account Jetton History By I D
+        id: get-account-jetton-history-by-i-d
+      - content: Get Account Nft Items
+        id: get-account-nft-items
+      - content: Get Account Events
+        id: get-account-events
+      - content: Get Account Event
+        id: get-account-event
+      - content: Get Account Traces
+        id: get-account-traces
+      - content: Get Account Subscriptions
+        id: get-account-subscriptions
+      - content: Reindex Account
+        id: reindex-account
+      - content: Search Accounts
+        id: search-accounts
+      - content: Get Account Dns Expiring
+        id: get-account-dns-expiring
+      - content: Get Account Public Key
+        id: get-account-public-key
+      - content: Get Account Multisigs
+        id: get-account-multisigs
+      - content: Get Account Diff
+        id: get-account-diff
+      - content: Get Account Extra Currency History By I D
+        id: get-account-extra-currency-history-by-i-d
+      - content: Get Jetton Account History By I D
+        id: get-jetton-account-history-by-i-d
+      - content: Emulate Message To Account Event
+        id: emulate-message-to-account-event
+    contents:
+      - content: >-
+          Get human-friendly information about several accounts without
+          low-level details.
+        heading: get-accounts
+      - content: >-
+          Get human-friendly information about an account without low-level
+          details.
+        heading: get-account
+      - content: Get account's domains
+        heading: account-dns-back-resolve
+      - content: Get all Jettons balances by owner address
+        heading: get-account-jettons-balances
+      - content: Get Jetton balance by owner address
+        heading: get-account-jetton-balance
+      - content: Get the transfer jettons history for account
+        heading: get-account-jettons-history
+      - content: Please use `getJettonAccountHistoryByID`` instead
+        heading: get-account-jetton-history-by-i-d
+      - content: Get all NFT items by owner address
+        heading: get-account-nft-items
+      - content: >-
+          Get events for an account. Each event is built on top of a trace which
+          is a series of transactions caused by one inbound message. TonAPI
+          looks for known patterns inside the trace and splits the trace into
+          actions, where a single action represents a meaningful high-level
+          operation like a Jetton Transfer or an NFT Purchase. Actions are
+          expected to be shown to users. It is advised not to build any logic on
+          top of actions because actions can be changed at any time.
+        heading: get-account-events
+      - content: Get event for an account by event_id
+        heading: get-account-event
+      - content: Get traces for account
+        heading: get-account-traces
+      - content: Get all subscriptions by wallet address
+        heading: get-account-subscriptions
+      - content: Update internal cache for a particular account
+        heading: reindex-account
+      - content: Search by account domain name
+        heading: search-accounts
+      - content: Get expiring account .ton dns
+        heading: get-account-dns-expiring
+      - content: Get public key by account id
+        heading: get-account-public-key
+      - content: Get account's multisigs
+        heading: get-account-multisigs
+      - content: Get account's balance change
+        heading: get-account-diff
+      - content: Get the transfer history of extra currencies for an account.
+        heading: get-account-extra-currency-history-by-i-d
+      - content: Get the transfer jetton history for account and jetton
+        heading: get-jetton-account-history-by-i-d
+      - content: Emulate sending message to retrieve account-specific events
+        heading: emulate-message-to-account-event
+---
+
+{/* This file was generated by Fumadocs. Do not edit this file directly. Any changes should be made by running the generation command again. */}
+
+<APIPage document={"./tonapi-openapi.yml"} operations={[{"path":"/v2/accounts/_bulk","method":"post"},{"path":"/v2/accounts/{account_id}","method":"get"},{"path":"/v2/accounts/{account_id}/dns/backresolve","method":"get"},{"path":"/v2/accounts/{account_id}/jettons","method":"get"},{"path":"/v2/accounts/{account_id}/jettons/{jetton_id}","method":"get"},{"path":"/v2/accounts/{account_id}/jettons/history","method":"get"},{"path":"/v2/accounts/{account_id}/jettons/{jetton_id}/history","method":"get"},{"path":"/v2/accounts/{account_id}/nfts","method":"get"},{"path":"/v2/accounts/{account_id}/events","method":"get"},{"path":"/v2/accounts/{account_id}/events/{event_id}","method":"get"},{"path":"/v2/accounts/{account_id}/traces","method":"get"},{"path":"/v2/accounts/{account_id}/subscriptions","method":"get"},{"path":"/v2/accounts/{account_id}/reindex","method":"post"},{"path":"/v2/accounts/search","method":"get"},{"path":"/v2/accounts/{account_id}/dns/expiring","method":"get"},{"path":"/v2/accounts/{account_id}/publickey","method":"get"},{"path":"/v2/accounts/{account_id}/multisigs","method":"get"},{"path":"/v2/accounts/{account_id}/diff","method":"get"},{"path":"/v2/accounts/{account_id}/extra-currency/{id}/history","method":"get"},{"path":"/v2/jettons/{jetton_id}/accounts/{account_id}/history","method":"get"},{"path":"/v2/accounts/{account_id}/events/emulate","method":"post"}]} webhooks={[]} hasHead={true} />
